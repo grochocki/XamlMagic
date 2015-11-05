@@ -10,11 +10,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SigningKey", "SigningKey", 
 		Key.snk = Key.snk
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "XamlStyler.Service\Service.csproj", "{BD2A5B6F-0B1C-4B1D-90AF-707F62BB12C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "Plugin\Plugin.csproj", "{92321883-06AD-4FF8-8B6C-A259D72ED7E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "XamlStyler.UnitTests\UnitTests.csproj", "{E5245034-9CD0-4FC6-B141-BAE17BC251A5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{BD2A5B6F-0B1C-4B1D-90AF-707F62BB12C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin", "XamlStyler.Package\Plugin.csproj", "{92321883-06AD-4FF8-8B6C-A259D72ED7E9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{E5245034-9CD0-4FC6-B141-BAE17BC251A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,6 +22,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BD2A5B6F-0B1C-4B1D-90AF-707F62BB12C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BD2A5B6F-0B1C-4B1D-90AF-707F62BB12C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD2A5B6F-0B1C-4B1D-90AF-707F62BB12C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -30,10 +34,6 @@ Global
 		{E5245034-9CD0-4FC6-B141-BAE17BC251A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5245034-9CD0-4FC6-B141-BAE17BC251A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5245034-9CD0-4FC6-B141-BAE17BC251A5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{92321883-06AD-4FF8-8B6C-A259D72ED7E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

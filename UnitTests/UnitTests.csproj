@@ -74,7 +74,7 @@
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamlStyler.Service\Service.csproj">
+    <ProjectReference Include="..\Service\Service.csproj">
       <Project>{bd2a5b6f-0b1c-4b1d-90af-707f62bb12c0}</Project>
       <Name>Service</Name>
     </ProjectReference>
