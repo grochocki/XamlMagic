@@ -78,7 +78,7 @@ Features
 
 Contribute
 ==========
-* Download the Visual Studio 2013 SDK from http://www.microsoft.com/en-us/download/details.aspx?id=40758
+* Download the Visual Studio 2015 SDK from https://msdn.microsoft.com/en-us/library/bb166441.aspx
 * Fork the XamlStyler project into your own GitHub account
 * Develop some awesome features
 * Create a pull request when ready
