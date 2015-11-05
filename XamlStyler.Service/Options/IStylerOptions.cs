@@ -1,6 +1,6 @@
-using XamlStyler.Core.Reorder;
+using XamlStyler.Service.Reorder;
 
-namespace XamlStyler.Core.Options
+namespace XamlStyler.Service.Options
 {
     /// <summary>
     /// Options controls how Styler works

@@ -1,13 +1,10 @@
 ﻿// PkgCmdID.cs
 // MUST match PkgCmdID.h
-using System;
 
-namespace NicoVermeir.XamlStyler_Package
+namespace XamlStyler.Plugin
 {
     static class PkgCmdIDList
     {
-        public const uint cmdidBeautifyXaml =        0x100;
-
-
+        public const uint cmdidBeautifyXaml = 0x100;
     };
 }

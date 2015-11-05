@@ -3,41 +3,42 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
-    public class NodeReorderService: IProcessElementService
+    public sealed class NodeReorderService: IProcessElementService
     {
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; } = true;
 
         /// <summary>
         /// Name of parents to reorder children for
         /// </summary>
-        public List<NameSelector> ParentNodeNames { get; }
+        public List<NameSelector> ParentNodeNames { get; } = new List<NameSelector>();
+
         /// <summary>
         /// Name of children to reorder
         /// </summary>
-        public List<NameSelector> ChildNodeNames { get; }
+        public List<NameSelector> ChildNodeNames { get; } = new List<NameSelector>();
+
         /// <summary>
         /// Description on how to sort children
         /// </summary>
-        public List<SortBy> SortByAttributes { get; }
-
-        public NodeReorderService()
-        {
-            IsEnabled = true;
-            ParentNodeNames = new List<NameSelector>();
-            ChildNodeNames = new List<NameSelector>();
-            SortByAttributes = new List<SortBy>();
-        }
+        public List<SortBy> SortByAttributes { get; } = new List<SortBy>();
 
         public void ProcessElement(XElement element)
         {
-            if (!IsEnabled) return;
-            if (!element.HasElements) return;
-
-            if (ParentNodeNames.Any(match => match.IsMatch(element.Name)))
+            if (!this.IsEnabled)
             {
-                ReorderChildNodes(element);
+                return;
+            }
+
+            if (!element.HasElements)
+            {
+                return;
+            }
+
+            if (this.ParentNodeNames.Any(_ => _.IsMatch(element.Name)))
+            {
+                this.ReorderChildNodes(element);
             }
         }
 
@@ -71,8 +72,8 @@ namespace XamlStyler.Core.Reorder
                 {
                     XElement childElement = (XElement)child;
 
-                    var isMatchingChild = ChildNodeNames.Any(match => match.IsMatch(childElement.Name));
-                    if (isMatchingChild == false || inMatchingChildBlock == false)
+                    var isMatchingChild = this.ChildNodeNames.Any(_ => _.IsMatch(childElement.Name));
+                    if (!isMatchingChild || !inMatchingChildBlock)
                     {
                         childBlockIndex++;
                         inMatchingChildBlock = isMatchingChild;
@@ -80,7 +81,8 @@ namespace XamlStyler.Core.Reorder
 
                     if (isMatchingChild)
                     {
-                        currentNodeCollection.SortAttributeValues = SortByAttributes.Select(x => x.GetValue(childElement)).ToArray();
+                        currentNodeCollection.SortAttributeValues
+                            = this.SortByAttributes.Select(_ => _.GetValue(childElement)).ToArray();
                     }
 
                     currentNodeCollection.BlockIndex = childBlockIndex;
@@ -89,17 +91,21 @@ namespace XamlStyler.Core.Reorder
                 currentNodeCollection.Nodes.Add(child);
 
                 if (child.NodeType == XmlNodeType.Element)
+                {
                     currentNodeCollection = null;
+                }
             }
 
             if (currentNodeCollection != null)
+            {
                 currentNodeCollection.BlockIndex = childBlockIndex + 1;
+            }
 
             // sort node list
-            nodeCollections = nodeCollections.OrderBy(x => x).ToList();
+            nodeCollections = nodeCollections.OrderBy(_ => _).ToList();
 
             // replace the element's nodes
-            element.ReplaceNodes(nodeCollections.SelectMany(nc => nc.Nodes));
+            element.ReplaceNodes(nodeCollections.SelectMany(_ => _.Nodes));
         }
     }
 }

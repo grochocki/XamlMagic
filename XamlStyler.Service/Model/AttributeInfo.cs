@@ -1,13 +1,14 @@
-﻿using System;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 
-namespace XamlStyler.Core.Model
+namespace XamlStyler.Service.Model
 {
-    public class AttributeInfo
+    public sealed class AttributeInfo
     {
         // Fields
-        private static readonly Regex MarkupExtensionPattern = new Regex(@"^{(?!}).*}$", RegexOptions.Singleline | RegexOptions.Compiled);
-        private static readonly Regex MarkupTypePattern = new Regex(@"^{(?<type>[^\s}]*)", RegexOptions.Singleline | RegexOptions.Compiled);
+        private static readonly Regex MarkupExtensionPattern
+            = new Regex(@"^{(?!}).*}$", (RegexOptions.Singleline | RegexOptions.Compiled));
+        private static readonly Regex MarkupTypePattern
+            = new Regex(@"^{(?<type>[^\s}]*)", (RegexOptions.Singleline | RegexOptions.Compiled));
 
         public AttributeOrderRule OrderRule { get; }
         public string Name { get; }
@@ -17,17 +18,17 @@ namespace XamlStyler.Core.Model
 
         public AttributeInfo(string name, string value, AttributeOrderRule orderRule)
         {
-            Name = name;
-            Value = value;
-            IsMarkupExtension = MarkupExtensionPattern.IsMatch(value);
-            OrderRule = orderRule;
+            this.Name = name;
+            this.Value = value;
+            this.IsMarkupExtension = AttributeInfo.MarkupExtensionPattern.IsMatch(value);
+            this.OrderRule = orderRule;
 
-            if (IsMarkupExtension)
+            if (this.IsMarkupExtension)
             {
-                MatchCollection mc = MarkupTypePattern.Matches(value);
-                foreach (Match m in mc)
+                var matchCollection = AttributeInfo.MarkupTypePattern.Matches(value);
+                foreach (Match match in matchCollection)
                 {
-                    MarkupExtension = m.Groups["type"].Value;
+                    this.MarkupExtension = match.Groups["type"].Value;
                 }
             }
         }

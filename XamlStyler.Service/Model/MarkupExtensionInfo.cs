@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace XamlStyler.Core.Model
+namespace XamlStyler.Service.Model
 {
-    public class MarkupExtensionInfo
+    public sealed class MarkupExtensionInfo
     {
         /// <summary>
         /// Value could be string or MarkupExtensionInfo
@@ -18,8 +18,8 @@ namespace XamlStyler.Core.Model
 
         public MarkupExtensionInfo()
         {
-            ValueOnlyProperties = new List<object>();
-            KeyValueProperties = new List<KeyValuePair<string, object>>();
+            this.ValueOnlyProperties = new List<object>();
+            this.KeyValueProperties = new List<KeyValuePair<string, object>>();
         }
     }
 }

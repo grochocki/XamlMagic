@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using XamlStyler.Core;
-using XamlStyler.Core.Options;
+using XamlStyler.Service;
+using XamlStyler.Service.Options;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace NicoVermeir.XamlStyler_Package
+namespace XamlStyler.Plugin
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -35,14 +35,14 @@ namespace NicoVermeir.XamlStyler_Package
     [ProvideProfile(typeof (PackageOptions), "Xaml Styler", "Xaml Styler Settings", 106, 107, true,
         DescriptionResourceID = 108)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [Guid(GuidList.guidXamlStyler_PackagePkgString)]
+    [Guid(GuidList.GuidXamlStylerPackagePkgString)]
     public sealed class StylerPackage : Package //, IDTExtensibility2
     {
-        private DTE _dte;
-        private Events _events;
-        private CommandEvents _fileSaveAll;
-        private CommandEvents _fileSaveSelectedItems;
-        private IVsUIShell _uiShell;
+        private DTE dte;
+        private Events events;
+        private CommandEvents fileSaveAll;
+        private CommandEvents fileSaveSelectedItems;
+        private IVsUIShell uiShell;
 
         /// <summary>
         /// Default constructor of the package.
@@ -56,8 +56,6 @@ namespace NicoVermeir.XamlStyler_Package
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", ToString()));
         }
 
-        #region Methods
-
         /// <summary>
         /// Initialization of the package; this method is called right after the package is sited, so this is the place
         /// where you can put all the initilaization code that rely on services provided by VisualStudio.
@@ -67,38 +65,37 @@ namespace NicoVermeir.XamlStyler_Package
             Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", ToString()));
             base.Initialize();
 
-            _dte = GetService(typeof (DTE)) as DTE;
+            this.dte = GetService(typeof (DTE)) as DTE;
 
-            if (_dte == null)
+            if (this.dte == null)
             {
                 throw new NullReferenceException("DTE is null");
             }
 
-            _uiShell = GetService(typeof (IVsUIShell)) as IVsUIShell;
+            this.uiShell = GetService(typeof (IVsUIShell)) as IVsUIShell;
 
             // Initialize command events listeners
-            _events = _dte.Events;
+            this.events = this.dte.Events;
 
             // File.SaveSelectedItems command
-            _fileSaveSelectedItems = _events.CommandEvents["{5EFC7975-14BC-11CF-9B2B-00AA00573819}", 331];
-            _fileSaveSelectedItems.BeforeExecute +=
-                OnFileSaveSelectedItemsBeforeExecute;
+            this.fileSaveSelectedItems
+                = this.events.CommandEvents["{5EFC7975-14BC-11CF-9B2B-00AA00573819}", 331];
+            this.fileSaveSelectedItems.BeforeExecute += this.OnFileSaveSelectedItemsBeforeExecute;
 
             // File.SaveAll command
-            _fileSaveAll = _events.CommandEvents["{5EFC7975-14BC-11CF-9B2B-00AA00573819}", 224];
-            _fileSaveAll.BeforeExecute +=
-                OnFileSaveAllBeforeExecute;
+            this.fileSaveAll = this.events.CommandEvents["{5EFC7975-14BC-11CF-9B2B-00AA00573819}", 224];
+            this.fileSaveAll.BeforeExecute += this.OnFileSaveAllBeforeExecute;
 
             //Initialize menu command
             // Add our command handlers for menu (commands must exist in the .vsct file)
-            var menuCommandService = GetService(typeof (IMenuCommandService)) as OleMenuCommandService;
+            var menuCommandService = this.GetService(typeof (IMenuCommandService)) as OleMenuCommandService;
 
-            if (null != menuCommandService)
+            if (menuCommandService != null)
             {
                 // Create the command for the menu item.
-                var menuCommandId = new CommandID(GuidList.guidXamlStyler_PackageCmdSet,
-                                                  (int) PkgCmdIDList.cmdidBeautifyXaml);
-                var menuItem = new MenuCommand(MenuItemCallback, menuCommandId);
+                var menuCommandId = new CommandID(GuidList.GuidXamlStylerPackageCmdSet,
+                    (int) PkgCmdIDList.cmdidBeautifyXaml);
+                var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandId);
                 menuCommandService.AddCommand(menuItem);
             }
         }
@@ -106,70 +103,76 @@ namespace NicoVermeir.XamlStyler_Package
         private bool IsFormatableDocument(Document document)
         {
             bool isFormatableDocument;
-            isFormatableDocument = !document.ReadOnly && document.Language == "XAML";
+            isFormatableDocument = (!document.ReadOnly && (document.Language == "XAML"));
 
             if (!isFormatableDocument)
             {
                 //xamarin
-                isFormatableDocument = document.Language == "XML" && document.FullName.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase);
+                isFormatableDocument = (document.Language == "XML")
+                    && document.FullName.EndsWith(".xaml", StringComparison.OrdinalIgnoreCase);
             }
 
             return isFormatableDocument;
         }
 
-        private void OnFileSaveSelectedItemsBeforeExecute(string guid, int id, object customIn, object customOut,
-                                                          ref bool cancelDefault)
+        private void OnFileSaveSelectedItemsBeforeExecute(
+            string guid,
+            int id,
+            object customIn,
+            object customOut,
+            ref bool cancelDefault)
         {
-            Document document = _dte.ActiveDocument;
+            Document document = this.dte.ActiveDocument;
 
-            if (IsFormatableDocument(document))
+            if (this.IsFormatableDocument(document))
             {
                 var options = GetDialogPage(typeof (PackageOptions)).AutomationObject as IStylerOptions;
 
                 if (options.BeautifyOnSave)
                 {
-                    Execute(document);
+                    this.Execute(document);
                 }
             }
         }
 
-        private void OnFileSaveAllBeforeExecute(string guid, int id, object customIn, object customOut,
-                                                ref bool cancelDefault)
+        private void OnFileSaveAllBeforeExecute(
+            string guid,
+            int id,
+            object customIn,
+            object customOut,
+            ref bool cancelDefault)
         {
-
             // use parallel processing, but only on the documents that are formatable 
             // (to avoid the overhead of Task creating when it's not necessary)
 
             List<Document> docs = new List<Document>();
-            foreach (Document document in _dte.Documents)
+            foreach (Document document in this.dte.Documents)
             {
-                if (IsFormatableDocument(document))
+                if (this.IsFormatableDocument(document))
                 {
                     docs.Add(document);
                 }
             }
 
             Parallel.ForEach(docs, document =>
+            {
+                var options = GetDialogPage(typeof(PackageOptions)).AutomationObject as IStylerOptions;
+                if (options.BeautifyOnSave)
                 {
-                    var options = GetDialogPage(typeof(PackageOptions)).AutomationObject as IStylerOptions;
-
-                    if (options.BeautifyOnSave)
-                    {
-                        Execute(document);
-                    }
+                    this.Execute(document);
                 }
-                );
+            });
 
         }
 
         private void Execute(Document document)
         {
-            if (!IsFormatableDocument(document))
+            if (!this.IsFormatableDocument(document))
             {
                 return;
             }
 
-            Properties xamlEditorProps = _dte.Properties["TextEditor", "XAML"];
+            Properties xamlEditorProps = this.dte.Properties["TextEditor", "XAML"];
 
             var stylerOptions = GetDialogPage(typeof (PackageOptions)).AutomationObject as IStylerOptions;
 
@@ -211,24 +214,24 @@ namespace NicoVermeir.XamlStyler_Package
         {
             try
             {
-                _uiShell.SetWaitCursor();
+                this.uiShell.SetWaitCursor();
 
-                Document document = _dte.ActiveDocument;
+                Document document = this.dte.ActiveDocument;
 
-                if (IsFormatableDocument(document))
+                if (this.IsFormatableDocument(document))
                 {
-                    Execute(document);
+                    this.Execute(document);
                 }
             }
             catch (Exception ex)
             {
                 string title = string.Format("Error in {0}:", GetType().Name);
-                string message = string.Format(
+                string message = String.Format(
                     CultureInfo.CurrentCulture,
-                    "{0}\r\n\r\nIf this deems a malfunctioning of styler, please kindly submit an issue at https://github.com/NicoVermeir/XamlStyler.",
+                    "{0}\r\n\r\nIf this deems a malfunctioning of styler, please kindly submit an issue at https://github.com/dgrochocki/XamlStyler.",
                     ex.Message);
 
-                ShowMessageBox(title, message);
+                this.ShowMessageBox(title, message);
             }
         }
 
@@ -237,7 +240,7 @@ namespace NicoVermeir.XamlStyler_Package
             Guid clsid = Guid.Empty;
             int result;
 
-            _uiShell.ShowMessageBox(
+            this.uiShell.ShowMessageBox(
                 0,
                 ref clsid,
                 title,
@@ -250,7 +253,5 @@ namespace NicoVermeir.XamlStyler_Package
                 0, // false
                 out result);
         }
-
-        #endregion Methods
     }
 }

@@ -1,21 +1,17 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
     /// <summary>
     /// Create regular expression (RegEx) from simple "DOS" wildcard (* and ?).
     /// </summary>
-    public class Wildcard : Regex
+    public sealed class Wildcard : Regex
     {
         public Wildcard(string pattern)
-            : base(WildcardToRegex(pattern))
-        {
-        }
+            : base(WildcardToRegex(pattern)) { }
 
         public Wildcard(string pattern, RegexOptions options)
-            : base(WildcardToRegex(pattern), options)
-        {
-        }
+            : base(WildcardToRegex(pattern), options) { }
 
         public static string WildcardToRegex(string pattern)
         {

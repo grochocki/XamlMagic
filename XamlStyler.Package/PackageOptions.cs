@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.Shell;
-using XamlStyler.Core.Options;
+using XamlStyler.Service.Options;
 
-namespace NicoVermeir.XamlStyler_Package
+namespace XamlStyler.Plugin
 {
     public class PackageOptions : DialogPage
     {

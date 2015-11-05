@@ -1,43 +1,51 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using XamlStyler.Core.Helpers;
+using XamlStyler.Service.Helpers;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
-    public class FormatThicknessService : IProcessElementService
+    public sealed class FormatThicknessService : IProcessElementService
     {
-        public FormatThicknessService(ThicknessStyle thicknessStyle, string thicknessAttributes)
-        {
-            IsEnabled = thicknessStyle != ThicknessStyle.None;
-            ThicknessStyle = thicknessStyle;
-            ThicknessAttributeNames = thicknessAttributes.ToNameSelectorList();
-        }
+        private const string XamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
+        private static readonly XName SetterName = XName.Get("Setter", XamlNamespace);
 
         public bool IsEnabled { get; }
 
         public ThicknessStyle ThicknessStyle { get; }
+
         public IList<NameSelector> ThicknessAttributeNames { get; }
 
-        private const string XamlNamespace = "http://schemas.microsoft.com/winfx/2006/xaml/presentation";
-        private static readonly XName SetterName = XName.Get("Setter", XamlNamespace);
+        public FormatThicknessService(ThicknessStyle thicknessStyle, string thicknessAttributes)
+        {
+            this.IsEnabled = (thicknessStyle != ThicknessStyle.None);
+            this.ThicknessStyle = thicknessStyle;
+            this.ThicknessAttributeNames = thicknessAttributes.ToNameSelectorList();
+        }
 
         public void ProcessElement(XElement element)
         {
-            if (!IsEnabled) return;
-            if (!element.HasAttributes) return;
+            if (!this.IsEnabled)
+            {
+                return;
+            }
+
+            if (!element.HasAttributes)
+            {
+                return;
+            }
 
             // Setter? Format "Value" attribute if "Property" atribute matches ThicknessAttributeNames
             if (element.Name == SetterName)
             {
                 var propertyAttribute = element.Attributes("Property").FirstOrDefault();
-                if (propertyAttribute != null && ThicknessAttributeNames.Any(match => match.IsMatch(propertyAttribute.Value)))
+                if ((propertyAttribute != null)
+                    && this.ThicknessAttributeNames.Any(_ => _.IsMatch(propertyAttribute.Value)))
                 {
                     var valueAttribute = element.Attributes("Value").FirstOrDefault();
                     if (valueAttribute != null)
                     {
-                        FormatAttribute(valueAttribute);
+                        this.FormatAttribute(valueAttribute);
                     }
                 }
             }
@@ -46,10 +54,9 @@ namespace XamlStyler.Core.Reorder
             {
                 foreach (var attribute in element.Attributes())
                 {
-                    var isMatchingAttribute = ThicknessAttributeNames.Any(match => match.IsMatch(attribute.Name));
-                    if (isMatchingAttribute)
+                    if (this.ThicknessAttributeNames.Any(_ => _.IsMatch(attribute.Name)))
                     {
-                        FormatAttribute(attribute);
+                        this.FormatAttribute(attribute);
                     }
                 }
             }
@@ -57,7 +64,7 @@ namespace XamlStyler.Core.Reorder
 
         private void FormatAttribute(XAttribute attribute)
         {
-            char separator = ThicknessStyle == ThicknessStyle.Comma ? ',' : ' ';
+            char separator = (this.ThicknessStyle == ThicknessStyle.Comma) ? ',' : ' ';
 
             string formatted;
             if (ThicknessFormatter.TryFormat(attribute.Value, separator, out formatted))

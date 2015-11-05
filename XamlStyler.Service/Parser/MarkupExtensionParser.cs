@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using XamlStyler.Core.Helpers;
-using XamlStyler.Core.Model;
+using XamlStyler.Service.Helpers;
+using XamlStyler.Service.Model;
 
-namespace XamlStyler.Core.Parser
+namespace XamlStyler.Service.Parser
 {
     internal static class MarkupExtensionParser
     {
@@ -16,44 +16,37 @@ namespace XamlStyler.Core.Parser
 
         public static MarkupExtensionInfo Parse(string input)
         {
-            #region Parameter Checks
-
             if (!MarkupExtensionPattern.IsMatch(input))
             {
-                string msg = $"{input} is not a MarkupExtension.";
-                throw new InvalidOperationException(msg);
+                throw new InvalidOperationException($"{input} is not a MarkupExtension.");
             }
-
-            #endregion Parameter Checks
 
             var resultInfo = new MarkupExtensionInfo();
 
             using (var reader = new StringReader(input))
             {
-                var parsingMode = MarkupExtensionParsingModeEnum.START;
+                var parsingMode = MarkupExtensionParsingModeEnum.Start;
 
                 try
                 {
                     //Debug.Print("Parsing '{0}'", input);
                     //Debug.Indent();
 
-                    while (MarkupExtensionParsingModeEnum.END != parsingMode
-                           && MarkupExtensionParsingModeEnum.UNEXPECTED != parsingMode)
+                    while ((MarkupExtensionParsingModeEnum.End != parsingMode)
+                        && (MarkupExtensionParsingModeEnum.Unexpected != parsingMode))
                     {
                         //Debug.Print(context.ToString());
                         //Debug.Indent();
 
                         switch (parsingMode)
                         {
-                            case MarkupExtensionParsingModeEnum.START:
+                            case MarkupExtensionParsingModeEnum.Start:
                                 parsingMode = reader.ReadMarkupExtensionStart();
                                 break;
-
-                            case MarkupExtensionParsingModeEnum.MARKUP_NAME:
+                            case MarkupExtensionParsingModeEnum.MarkupName:
                                 parsingMode = reader.ReadMarkupName(resultInfo);
                                 break;
-
-                            case MarkupExtensionParsingModeEnum.NAME_VALUE_PAIR:
+                            case MarkupExtensionParsingModeEnum.NameValuePair:
                                 parsingMode = reader.ReadNameValuePair(resultInfo);
                                 break;
                         }
@@ -61,10 +54,9 @@ namespace XamlStyler.Core.Parser
                         //Debug.Unindent();
                     }
                 }
-                catch (Exception exp)
+                catch (Exception e)
                 {
-                    throw new InvalidDataException(
-                        String.Format("Cannot parse markup extension string:\r\n \"{0}\"", input), exp);
+                    throw new InvalidDataException($"Cannot parse markup extension string:\r\n \"{input}\"", e);
                 }
             }
 
@@ -97,15 +89,15 @@ namespace XamlStyler.Core.Parser
 
         private static MarkupExtensionParsingModeEnum ReadMarkupExtensionStart(this StringReader reader)
         {
-            reader.SeekTill(x => '{' != x && !Char.IsWhiteSpace(x));
+            reader.SeekTill(_ => ('{' != _) && !Char.IsWhiteSpace(_));
 
-            return MarkupExtensionParsingModeEnum.MARKUP_NAME;
+            return MarkupExtensionParsingModeEnum.MarkupName;
         }
 
         private static MarkupExtensionParsingModeEnum ReadMarkupName(this StringReader reader, MarkupExtensionInfo info)
         {
             char[] stopChars = {' ', '}'};
-            var resultParsingMode = MarkupExtensionParsingModeEnum.UNEXPECTED;
+            var resultParsingMode = MarkupExtensionParsingModeEnum.Unexpected;
             var buffer = new StringBuilder();
 
             while (!reader.IsEnd())
@@ -117,13 +109,11 @@ namespace XamlStyler.Core.Parser
                     switch (c)
                     {
                         case ' ':
-                            resultParsingMode = MarkupExtensionParsingModeEnum.NAME_VALUE_PAIR;
+                            resultParsingMode = MarkupExtensionParsingModeEnum.NameValuePair;
                             break;
-
                         case '}':
-                            resultParsingMode = MarkupExtensionParsingModeEnum.END;
+                            resultParsingMode = MarkupExtensionParsingModeEnum.End;
                             break;
-
                         default:
                             throw new InvalidDataException($"[{nameof(ReadMarkupName)}] Should not encounter '{c}'.");
                     }
@@ -131,14 +121,13 @@ namespace XamlStyler.Core.Parser
                     info.Name = buffer.ToString().Trim();
                     buffer.Clear();
 
-                    // break out the while
                     break;
                 }
                 
                 buffer.Append(c);
             }
 
-            if (MarkupExtensionParsingModeEnum.UNEXPECTED == resultParsingMode)
+            if (MarkupExtensionParsingModeEnum.Unexpected == resultParsingMode)
             {
                 throw new InvalidDataException($"[{nameof(ReadMarkupName)}] Invalid result context: {resultParsingMode}");
             }
@@ -146,8 +135,9 @@ namespace XamlStyler.Core.Parser
             return resultParsingMode;
         }
 
-        private static MarkupExtensionParsingModeEnum ReadNameValuePair(this StringReader reader,
-                                                                        MarkupExtensionInfo info)
+        private static MarkupExtensionParsingModeEnum ReadNameValuePair(
+            this StringReader reader,
+            MarkupExtensionInfo info)
         {
             char[] stopChars = {',', '=', '}'};
 
@@ -155,7 +145,7 @@ namespace XamlStyler.Core.Parser
             string key = null;
             object value = null;
 
-            reader.SeekTill(x => !Char.IsWhiteSpace(x));
+            reader.SeekTill(_ => !Char.IsWhiteSpace(_));
 
             // When '{' is the starting char, the following must be a value instead of a key.
             //
@@ -165,7 +155,7 @@ namespace XamlStyler.Core.Parser
             //            Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
             //
             // In other words, "key" shall not start with '{', as it won't be a valid property name.
-            if ('{' != reader.PeekChar())
+            if (reader.PeekChar() != '{')
             {
                 string temp = reader.ReadTill(stopChars.Contains).Trim();
                 char keyValueIndicatorChar = reader.PeekChar();
@@ -176,14 +166,11 @@ namespace XamlStyler.Core.Parser
                     case '}':
                         value = temp;
                         break;
-
                     case '=':
                         key = temp;
-
                         // Consume the '='
                         reader.Read();
                         break;
-
                     default:
                         throw new InvalidDataException($"[{nameof(ReadNameValuePair)}] Should not encounter '{keyValueIndicatorChar}'.");
                 }
@@ -191,7 +178,7 @@ namespace XamlStyler.Core.Parser
 
             if (value == null)
             {
-                reader.SeekTill(x => !(Char.IsWhiteSpace(x)));
+                reader.SeekTill(_ => !(Char.IsWhiteSpace(_)));
 
                 string input = reader.ReadValueString();
 
@@ -214,25 +201,23 @@ namespace XamlStyler.Core.Parser
                 info.KeyValueProperties.Add(new KeyValuePair<string, object>(key, value));
             }
 
-            reader.SeekTill(x => !Char.IsWhiteSpace(x));
+            reader.SeekTill(_ => !Char.IsWhiteSpace(_));
 
             char stopChar = reader.ReadChar();
 
             switch (stopChar)
             {
                 case ',':
-                    resultParsingMode = MarkupExtensionParsingModeEnum.NAME_VALUE_PAIR;
+                    resultParsingMode = MarkupExtensionParsingModeEnum.NameValuePair;
                     break;
-
                 case '}':
-                    resultParsingMode = MarkupExtensionParsingModeEnum.END;
+                    resultParsingMode = MarkupExtensionParsingModeEnum.End;
                     break;
-
                 default:
                     throw new InvalidDataException($"[{nameof(ReadNameValuePair)}] Should not encounter '{stopChar}'.");
             }
 
-            if (MarkupExtensionParsingModeEnum.UNEXPECTED == resultParsingMode)
+            if (MarkupExtensionParsingModeEnum.Unexpected == resultParsingMode)
             {
                 throw new InvalidDataException($"[{nameof(ReadNameValuePair)}] Invalid result context: {resultParsingMode}");
             }
@@ -268,31 +253,35 @@ namespace XamlStyler.Core.Parser
             MarkupExtensionParsingModeEnum parsingMode;
 
             // ignore leading spaces
-            reader.SeekTill(x => !Char.IsWhiteSpace(x));
+            reader.SeekTill(_ => !Char.IsWhiteSpace(_));
 
             // Determine parsing mode
             char c = reader.ReadChar();
             buffer.Append(c);
 
-            if ('{' == c)
+            if (c == '{')
             {
                 char peek = reader.PeekChar();
-                parsingMode = '}' != peek ? MarkupExtensionParsingModeEnum.MARKUP_EXTENSION_VALUE : MarkupExtensionParsingModeEnum.LITERAL_VALUE;
+
+                parsingMode = ('}' != peek)
+                    ? MarkupExtensionParsingModeEnum.MarkupExtensionValue
+                    : MarkupExtensionParsingModeEnum.LiteralValue;
+
                 curlyBracePairCounter++;
             }
-            else if ('\'' == c)
+            else if (c == '\'')
             {
-                parsingMode = MarkupExtensionParsingModeEnum.QUOTED_LITERAL_VALUE;
+                parsingMode = MarkupExtensionParsingModeEnum.QuotedLiteralValue;
             }
             else
             {
-                parsingMode = MarkupExtensionParsingModeEnum.LITERAL_VALUE;
+                parsingMode = MarkupExtensionParsingModeEnum.LiteralValue;
             }
 
             switch (parsingMode)
             {
-                case MarkupExtensionParsingModeEnum.MARKUP_EXTENSION_VALUE:
-                    while (curlyBracePairCounter > 0 && (!reader.IsEnd()))
+                case MarkupExtensionParsingModeEnum.MarkupExtensionValue:
+                    while ((curlyBracePairCounter > 0) && !reader.IsEnd())
                     {
                         c = reader.ReadChar();
                         buffer.Append(c);
@@ -302,27 +291,25 @@ namespace XamlStyler.Core.Parser
                             case '{':
                                 curlyBracePairCounter++;
                                 break;
-
                             case '}':
                                 curlyBracePairCounter--;
                                 break;
                         }
                     }
                     break;
-
-                case MarkupExtensionParsingModeEnum.QUOTED_LITERAL_VALUE:
-
+                case MarkupExtensionParsingModeEnum.QuotedLiteralValue:
                     // Following case is handled:
                     //      StringFormat='{}{0}\'s email'
                     do
                     {
-                        buffer.Append(reader.ReadTill(x => '\'' == x));
+                        buffer.Append(reader.ReadTill(_ => (_ == '\'')));
                         buffer.Append(reader.ReadChar());
-                    } while (buffer.Length > 2 && '\'' == buffer[buffer.Length - 1] && '\\' == buffer[buffer.Length - 2]);
+                    } while ((buffer.Length > 2)
+                        && (buffer[buffer.Length - 1] == '\'')
+                        && (buffer[buffer.Length - 2] == '\\'));
 
                     break;
-
-                case MarkupExtensionParsingModeEnum.LITERAL_VALUE:
+                case MarkupExtensionParsingModeEnum.LiteralValue:
                     bool shouldStop = false;
 
                     while (!reader.IsEnd())
@@ -332,7 +319,6 @@ namespace XamlStyler.Core.Parser
                             case '{':
                                 curlyBracePairCounter++;
                                 break;
-
                             case '}':
                                 if (curlyBracePairCounter > 0)
                                 {
@@ -343,12 +329,10 @@ namespace XamlStyler.Core.Parser
                                     shouldStop = true;
                                 }
                                 break;
-
                             // Escape character
                             case '\\':
                                 buffer.Append(reader.ReadChar());
                                 break;
-
                             case ',':
                                 shouldStop = (curlyBracePairCounter == 0);
                                 break;
@@ -364,7 +348,6 @@ namespace XamlStyler.Core.Parser
                         }
                     }
                     break;
-
                 default:
                     throw new InvalidDataException($"[{nameof(ReadValueString)}] Should not encouter parsingMode {parsingMode}");
             }

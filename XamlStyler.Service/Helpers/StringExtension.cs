@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using XamlStyler.Core.Reorder;
+using XamlStyler.Service.Reorder;
 
-namespace XamlStyler.Core.Helpers
+namespace XamlStyler.Service.Helpers
 {
     public static class StringExtension
     {
@@ -41,8 +42,8 @@ namespace XamlStyler.Core.Helpers
         {
             return !string.IsNullOrEmpty(source)
                 ? source.Split(',')
-                    .Where(x => !string.IsNullOrWhiteSpace(x))
-                    .Select(x => x.Trim())
+                    .Where(_ => !String.IsNullOrWhiteSpace(_))
+                    .Select(_ => _.Trim())
                     .ToList()
                 : new List<string>();
         }
@@ -51,8 +52,8 @@ namespace XamlStyler.Core.Helpers
         {
             return !string.IsNullOrEmpty(source)
                 ? source.Split(',')
-                    .Where(x => !string.IsNullOrWhiteSpace(x))
-                    .Select(x => new NameSelector(x.Trim()))
+                    .Where(_ => !String.IsNullOrWhiteSpace(_))
+                    .Select(_ => new NameSelector(_.Trim()))
                     .ToList()
                 : new List<NameSelector>();
         }

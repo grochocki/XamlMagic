@@ -1,6 +1,6 @@
-﻿namespace XamlStyler.Core.Parser
+﻿namespace XamlStyler.Service.Parser
 {
-    public class ElementProcessStatus
+    public sealed class ElementProcessStatus
     {
         /// <summary>
         /// Gets or sets the content type of current element.
@@ -41,6 +41,5 @@
         /// Access to parent element
         /// </summary>
         public ElementProcessStatus Parent { get; set; }
-
     }
 }

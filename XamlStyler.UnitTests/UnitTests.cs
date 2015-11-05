@@ -1,14 +1,14 @@
 ﻿using System.Text;
 using System.IO;
 using NUnit.Framework;
-using XamlStyler.Core;
-using XamlStyler.Core.Options;
-using XamlStyler.Core.Reorder;
+using XamlStyler.Service;
+using XamlStyler.Service.Options;
+using XamlStyler.Service.Reorder;
 
 namespace XamlStyler.UnitTests
 {
     [TestFixture]
-    public class UnitTests
+    public sealed class UnitTests
     {
         [Test]
         public void TestAttributeThresholdHandling()
@@ -21,7 +21,7 @@ namespace XamlStyler.UnitTests
                 PutEndingBracketOnNewLine = true
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace XamlStyler.UnitTests
                 RootElementLineBreakRule = LineBreakRule.Always,
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [TestCase(0)]
@@ -47,13 +47,13 @@ namespace XamlStyler.UnitTests
                 CommentSpaces = testNumber,
             };
 
-            DoTestCase(stylerOptions, testNumber);
+            this.DoTestCase(stylerOptions, testNumber);
         }
 
         [Test]
         public void TestDefaultHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
@@ -88,7 +88,7 @@ namespace XamlStyler.UnitTests
                 }
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [Test]
@@ -99,7 +99,7 @@ namespace XamlStyler.UnitTests
                 NoNewLineMarkupExtensions = "x:Bind"
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [Test]
@@ -110,7 +110,7 @@ namespace XamlStyler.UnitTests
                 NoNewLineMarkupExtensions = "x:Bind, Binding"
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [Test]
@@ -121,7 +121,7 @@ namespace XamlStyler.UnitTests
                 FormatMarkupExtension = true
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [Test]
@@ -133,50 +133,50 @@ namespace XamlStyler.UnitTests
                 AttributesTolerance = 1
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [Test]
         public void TestNoContentElementHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
         public void TestTextOnlyContentElementHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
 
         [Test]
         public void TestGridChildrenHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
         public void TestNestedGridChildrenHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
         public void TestCanvasChildrenHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
         public void TestNestedCanvasChildrenHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
         public void TestNestedPropertiesAndChildrenHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
@@ -188,7 +188,7 @@ namespace XamlStyler.UnitTests
                 MaxAttributesPerLine = 3,
             };
 
-            DoTest(stylerOptions);
+            this.DoTest(stylerOptions);
         }
 
         [TestCase(ReorderSettersBy.Property)]
@@ -201,7 +201,7 @@ namespace XamlStyler.UnitTests
                 ReorderSetters = reorderSettersBy,
             };
 
-            DoTestCase(stylerOptions, reorderSettersBy);
+            this.DoTestCase(stylerOptions, reorderSettersBy);
         }
 
         [TestCase(1, true)]
@@ -213,19 +213,19 @@ namespace XamlStyler.UnitTests
                 SpaceBeforeClosingSlash = spaceBeforeClosingSlash
             };
 
-            DoTestCase(stylerOptions, testNumber);
+            this.DoTestCase(stylerOptions, testNumber);
         }
 
         [Test]
         public void TestCDATAHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [Test]
         public void TestXmlSpaceHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         [TestCase(ThicknessStyle.None)]
@@ -238,7 +238,7 @@ namespace XamlStyler.UnitTests
                 ThicknessStyle = thicknessStyle
             };
 
-            DoTestCase(stylerOptions, thicknessStyle);
+            this.DoTestCase(stylerOptions, thicknessStyle);
         }
 
         [TestCase(1, LineBreakRule.Default)]
@@ -254,19 +254,18 @@ namespace XamlStyler.UnitTests
                 RootElementLineBreakRule = lineBreakRule,
             };
 
-            DoTestCase(stylerOptions, testNumber);
+            this.DoTestCase(stylerOptions, testNumber);
         }
 
         [Test]
         public void TestRunHandling()
         {
-            DoTest();
+            this.DoTest();
         }
 
         private void DoTest([System.Runtime.CompilerServices.CallerMemberName] string callerMemberName = "")
         {
-            // ReSharper disable once ExplicitCallerInfoArgument
-            DoTest(new StylerOptions(), callerMemberName);
+            this.DoTest(new StylerOptions(), callerMemberName);
         }
 
         private void DoTest(StylerOptions stylerOptions, [System.Runtime.CompilerServices.CallerMemberName] string callerMemberName = "")

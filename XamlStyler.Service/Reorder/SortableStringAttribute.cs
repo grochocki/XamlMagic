@@ -1,14 +1,14 @@
 using System;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
-    public class SortableStringAttribute: ISortableAttribute
+    public sealed class SortableStringAttribute: ISortableAttribute
     {
         public string Value { get; private set; }
 
         public SortableStringAttribute(string value)
         {
-            Value = value;
+            this.Value = value;
         }
 
         public int CompareTo(ISortableAttribute other)

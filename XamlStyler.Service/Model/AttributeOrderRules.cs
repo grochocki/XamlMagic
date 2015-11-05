@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using XamlStyler.Core.Options;
+using XamlStyler.Service.Options;
 
-namespace XamlStyler.Core.Model
+namespace XamlStyler.Service.Model
 {
-    public class AttributeOrderRules
+    public sealed class AttributeOrderRules
     {
-        private readonly IList<AttributeOrderRule> _rules;
+        private readonly IList<AttributeOrderRule> Rules;
 
         public AttributeOrderRules(IStylerOptions options)
         {
-            _rules = new List<AttributeOrderRule>();
+            this.Rules = new List<AttributeOrderRule>();
 
             var groupIndex = 1;
             foreach (var @group in options.AttributeOrderingRuleGroups)
             {
-                if (!string.IsNullOrWhiteSpace(@group))
+                if (!String.IsNullOrWhiteSpace(@group))
                 {
                     int priority = 1;
 
                     string[] names = @group.Split(',')
-                        .Where(x => !string.IsNullOrWhiteSpace(x))
-                        .Select(x => x.Trim())
+                        .Where(_ => !String.IsNullOrWhiteSpace(_))
+                        .Select(_ => _.Trim())
                         .ToArray();
 
                     foreach (var name in names)
                     {
-                        _rules.Add(new AttributeOrderRule(name, groupIndex, priority));
+                        this.Rules.Add(new AttributeOrderRule(name, groupIndex, priority));
                         priority++;
                     }
                 }
@@ -35,14 +35,14 @@ namespace XamlStyler.Core.Model
             }
 
             // Add catch all group at the end ensuring we always get a match;
-            _rules.Add(new AttributeOrderRule("*",groupIndex,0));
+            this.Rules.Add(new AttributeOrderRule("*", groupIndex, 0));
         }
 
         public AttributeOrderRule GetRuleFor(string attributeName)
         {
-            return _rules
-                .Where(x => x.Name.IsMatch(attributeName))
-                .OrderByDescending(x => x.MatchScore)
+            return this.Rules
+                .Where(_ => _.Name.IsMatch(attributeName))
+                .OrderByDescending(_ => _.MatchScore)
                 .FirstOrDefault();
         }
     }

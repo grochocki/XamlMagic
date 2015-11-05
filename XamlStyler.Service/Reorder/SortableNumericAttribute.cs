@@ -1,18 +1,19 @@
 using System;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
-    public class SortableNumericAttribute: ISortableAttribute
+    public sealed class SortableNumericAttribute: ISortableAttribute
     {
         public string Value { get; private set; }
+
         public double NumericValue { get; private set; }
 
         public SortableNumericAttribute(string value, double defaultNumericValue)
         {
-            Value = value;
+            this.Value = value;
 
             double numericValue;
-            NumericValue = Double.TryParse(value, out numericValue) 
+            this.NumericValue = Double.TryParse(value, out numericValue) 
                 ? numericValue 
                 : defaultNumericValue;
         }
@@ -23,14 +24,16 @@ namespace XamlStyler.Core.Reorder
 
             var result = NumericValue.CompareTo(otherSortableNumericAttribute.NumericValue);
             if(result == 0)
+            {
                 result = String.Compare(Value, otherSortableNumericAttribute.Value, StringComparison.Ordinal);
+            }
             return result;
         }
 
 #if DEBUG
         public override string ToString()
         {
-            return "D" + NumericValue;
+            return $"D{this.NumericValue}";
         }
 #endif
     }

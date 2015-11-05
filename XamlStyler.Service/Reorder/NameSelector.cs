@@ -2,24 +2,24 @@ using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
     public class NameSelector
     {
-        private string _name;
-        private Regex _nameRegex;
-        private string _namespace;
-        private Regex _namespaceRegex;
+        private string name;
+        private Regex nameRegex;
+        private string namespaceName;
+        private Regex namespaceRegex;
 
         [DisplayName("Name")]
         [Description("Match name by name. null/empty = all. 'DOS' Wildcards permitted.")]
         public string Name
         { 
-            get { return _name; }
+            get { return this.name; }
             set
             {
-                _name = value;
-                _nameRegex = _name != null ? new Wildcard(_name) : null;
+                this.name = value;
+                this.nameRegex = (this.name != null) ? new Wildcard(this.name) : null;
             } 
         }
 
@@ -27,40 +27,45 @@ namespace XamlStyler.Core.Reorder
         [Description("Match name by namespace. null/empty = all. 'DOS' Wildcards permitted.")]
         public string Namespace
         { 
-            get { return _namespace; }
+            get { return this.namespaceName; }
             set
             {
-                _namespace = value;
-                _namespaceRegex = _namespace != null ? new Wildcard(_namespace) : null;
+                this.namespaceName = value;
+                this.namespaceRegex = (this.namespaceName != null) ? new Wildcard(this.namespaceName) : null;
             } 
         }
 
-        public NameSelector()
-        {
-        }
+        public NameSelector() { }
 
         public NameSelector(string name)
         {
-            Name = name;
+            this.Name = name;
         }
 
         public NameSelector(string name, string @namespace)
         {
-            Name = name;
-            Namespace = @namespace;
+            this.Name = name;
+            this.Namespace = @namespace;
         }
 
         public bool IsMatch(XName name)
         {
-            if (_nameRegex != null && !_nameRegex.IsMatch(name.LocalName)) return false;
-            if (_namespaceRegex != null && !_namespaceRegex.IsMatch(name.Namespace.NamespaceName)) return false;
+            if (!this.nameRegex?.IsMatch(name.LocalName) ?? false)
+            {
+                return false;
+            }
+
+            if (!this.namespaceRegex?.IsMatch(name.Namespace.NamespaceName) ?? false)
+            {
+                return false;
+            }
+
             return true;
         }
 
         public override string ToString()
         {
-            return
-                (Namespace != null ? Namespace + ":" : null) + Name;
+            return (this.Namespace != null ? $"{this.Namespace}:" : null) + this.Name;
         }
     }
 }

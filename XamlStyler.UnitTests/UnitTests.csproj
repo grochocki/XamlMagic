@@ -10,7 +10,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XamlStyler.UnitTests</RootNamespace>
-    <AssemblyName>XamlStyler.UnitTests</AssemblyName>
+    <AssemblyName>UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -74,9 +74,9 @@
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\XamlStyler.Service\XamlStyler.Service.csproj">
+    <ProjectReference Include="..\XamlStyler.Service\Service.csproj">
       <Project>{bd2a5b6f-0b1c-4b1d-90af-707f62bb12c0}</Project>
-      <Name>XamlStyler.Service</Name>
+      <Name>Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,8 +1,6 @@
 using System;
 
-namespace XamlStyler.Core.Reorder
+namespace XamlStyler.Service.Reorder
 {
-    public interface ISortableAttribute : IComparable<ISortableAttribute>
-    {
-    }
+    public interface ISortableAttribute : IComparable<ISortableAttribute> { }
 }

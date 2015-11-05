@@ -1,19 +1,23 @@
 ﻿using System.ComponentModel;
-using XamlStyler.Core.Reorder;
+using XamlStyler.Service.Reorder;
 
-namespace XamlStyler.Core.Options
+namespace XamlStyler.Service.Options
 {
-    public class StylerOptions : IStylerOptions
+    public sealed class StylerOptions : IStylerOptions
     {
         public StylerOptions()
         {
             // Initialize all properties with "DefaultValueAttrbute" to their default value
-            foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(this))
+            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
             {
                 // Set default value if DefaultValueAttribute is present
-                DefaultValueAttribute attr = prop.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-                if (attr != null)
-                    prop.SetValue(this, attr.Value);
+                DefaultValueAttribute attribute
+                    = propertyDescriptor.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+
+                if (attribute != null)
+                {
+                    propertyDescriptor.SetValue(this, attribute.Value);
+                }
             }
         }
 
@@ -200,6 +204,5 @@ namespace XamlStyler.Core.Options
 0: <!--Hello world-->")]
         [DefaultValue((byte)2)]
         public byte CommentSpaces { get; set; }
-
     }
 }

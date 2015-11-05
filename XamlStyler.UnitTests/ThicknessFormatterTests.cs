@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
-using XamlStyler.Core.Reorder;
+﻿using NUnit.Framework;
+using XamlStyler.Service.Reorder;
 
 namespace XamlStyler.UnitTests
 {
     [TestFixture]
-    public class ThicknessFormatterUnitTests
+    public sealed class ThicknessFormatterUnitTests
     {
         [TestCase(" 123",' ',"123")]
         [TestCase(" 1.5 ",' ',"1.5")]

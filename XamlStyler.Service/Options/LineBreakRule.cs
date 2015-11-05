@@ -1,9 +1,9 @@
-namespace XamlStyler.Core.Options
+namespace XamlStyler.Service.Options
 {
     public enum LineBreakRule
     {
         Default,
         Always,
-        Never
+        Never,
     }
 }

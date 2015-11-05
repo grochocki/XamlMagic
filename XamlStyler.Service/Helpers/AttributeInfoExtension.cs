@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
-using XamlStyler.Core.Model;
-using XamlStyler.Core.Parser;
+using XamlStyler.Service.Model;
+using XamlStyler.Service.Parser;
 
-namespace XamlStyler.Core.Helpers
+namespace XamlStyler.Service.Helpers
 {
     internal static class AttributeInfoExtension
     {
@@ -15,28 +15,25 @@ namespace XamlStyler.Core.Helpers
         ///                          key1=value1,
         ///                          key2=value2}"
         /// </summary>
-        /// <param name="attrInfo"></param>
+        /// <param name="attributeInfo"></param>
         /// <param name="baseIndentationString"></param>
         /// <returns></returns>
-        public static string ToMultiLineString(this AttributeInfo attrInfo, string baseIndentationString)
+        public static string ToMultiLineString(this AttributeInfo attributeInfo, string baseIndentationString)
         {
-            #region Parameter Checks
-
-            if (!attrInfo.IsMarkupExtension)
+            if (!attributeInfo.IsMarkupExtension)
             {
-                throw new ArgumentException("AttributeInfo shall have a markup extension value.",
-                                            MethodBase.GetCurrentMethod().GetParameters()[0].Name);
+                throw new ArgumentException(
+                    "AttributeInfo must have a markup extension value.",
+                    MethodBase.GetCurrentMethod().GetParameters()[0].Name);
             }
 
-            #endregion Parameter Checks
-
-            MarkupExtensionInfo info = MarkupExtensionParser.Parse(attrInfo.Value);
-            string currentIndentationString = baseIndentationString +
-                                              String.Empty.PadLeft(attrInfo.Name.Length + 2, ' ');
+            MarkupExtensionInfo info = MarkupExtensionParser.Parse(attributeInfo.Value);
+            string currentIndentationString = baseIndentationString
+                + String.Empty.PadLeft((attributeInfo.Name.Length + 2), ' ');
             string value = info.ToMultiLineString(currentIndentationString);
 
             var buffer = new StringBuilder();
-            buffer.AppendFormat("{0}=\"{1}\"", attrInfo.Name, value);
+            buffer.AppendFormat("{0}=\"{1}\"", attributeInfo.Name, value);
 
             return buffer.ToString();
         }
@@ -45,25 +42,23 @@ namespace XamlStyler.Core.Helpers
         /// Single line attribute line in style as:
         /// attribute_name="attribute_value"
         /// </summary>
-        /// <param name="attrInfo"></param>
+        /// <param name="attributeInfo"></param>
         /// <returns></returns>
-        public static string ToSingleLineString(this AttributeInfo attrInfo)
+        public static string ToSingleLineString(this AttributeInfo attributeInfo)
         {
             string valuePart;
 
-            if (attrInfo.IsMarkupExtension)
+            if (attributeInfo.IsMarkupExtension)
             {
-                MarkupExtensionInfo info = MarkupExtensionParser.Parse(attrInfo.Value);
+                var info = MarkupExtensionParser.Parse(attributeInfo.Value);
                 valuePart = info.ToSingleLineString();
             }
             else
             {
-                valuePart = attrInfo.Value.ToXmlEncodedString();
+                valuePart = attributeInfo.Value.ToXmlEncodedString();
             }
 
-            return String.Format("{0}=\"{1}\"",
-                attrInfo.Name,
-                valuePart);
+            return $"{attributeInfo.Name}=\"{valuePart}\"";
         }
     }
 }

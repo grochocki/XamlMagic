@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using XamlStyler.Core.Model;
+using XamlStyler.Service.Model;
 
-namespace XamlStyler.Core.Helpers
+namespace XamlStyler.Service.Helpers
 {
     public static class MarkupExtensionInfoExtension
     {
@@ -37,7 +37,7 @@ namespace XamlStyler.Core.Helpers
                         buffer.Append(value);
                     }
 
-                    if (i == info.ValueOnlyProperties.Count - 1)
+                    if (i == (info.ValueOnlyProperties.Count - 1))
                     {
                         if (info.KeyValueProperties.Count > 0)
                         {

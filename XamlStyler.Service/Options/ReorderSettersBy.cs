@@ -1,10 +1,10 @@
-namespace XamlStyler.Core.Options
+namespace XamlStyler.Service.Options
 {
     public enum ReorderSettersBy
     {
         None,
         Property,
         TargetName,
-        TargetNameThenProperty
+        TargetNameThenProperty,
     }
 }
