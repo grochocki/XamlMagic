@@ -1,7 +1,7 @@
 ﻿using System.Linq;
-using XamlStyler.Service.Reorder;
+using XamlMagic.Service.Reorder;
 
-namespace XamlStyler.Service.Model
+namespace XamlMagic.Service.Model
 {
     public sealed class AttributeOrderRule
     {

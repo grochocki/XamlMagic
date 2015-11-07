@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using XamlStyler.Service.Reorder;
+using XamlMagic.Service.Reorder;
 
-namespace XamlStyler.UnitTests
+namespace XamlMagic.UnitTests
 {
     [TestFixture]
     public sealed class ThicknessFormatterUnitTests

@@ -127,7 +127,7 @@
     <value>Xaml Styler settings.</value>
   </data>
   <data name="110" xml:space="preserve">
-    <value>XamlStylerVSPackage</value>
+    <value>XamlMagicVSPackage</value>
   </data>
   <data name="112" xml:space="preserve">
     <value>Xaml Styler.</value>

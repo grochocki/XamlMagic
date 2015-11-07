@@ -1,4 +1,4 @@
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     public enum ThicknessStyle
     {

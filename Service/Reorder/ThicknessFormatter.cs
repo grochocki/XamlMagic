@@ -1,7 +1,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     public static class ThicknessFormatter
     {

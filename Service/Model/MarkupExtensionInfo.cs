@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace XamlStyler.Service.Model
+namespace XamlMagic.Service.Model
 {
     public sealed class MarkupExtensionInfo
     {

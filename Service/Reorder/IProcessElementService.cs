@@ -1,6 +1,6 @@
 using System.Xml.Linq;
 
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     public interface IProcessElementService
     {

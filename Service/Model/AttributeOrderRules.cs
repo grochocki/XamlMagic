@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using XamlStyler.Service.Options;
+using XamlMagic.Service.Options;
 
-namespace XamlStyler.Service.Model
+namespace XamlMagic.Service.Model
 {
     public sealed class AttributeOrderRules
     {

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
-using XamlStyler.Service.Reorder;
+using XamlMagic.Service.Reorder;
 
-namespace XamlStyler.Service.Options
+namespace XamlMagic.Service.Options
 {
     public sealed class StylerOptions : IStylerOptions
     {
@@ -37,7 +37,7 @@ namespace XamlStyler.Service.Options
 
         [Category("Attribute Formatting")]
         [DisplayName("Attribute tolerance")]
-        [Description("Defines the attribute number tolerance before XamlStyler starts to break attributes into new lines. A value less than 1 meaning no tolerance. \r\ne.g., when this setting is 2 \r\n\r\nBEFORE BEAUTIFY:\r\n<TextBlock x:Name=\"m_sample\"\r\n    Text=\"asdf\" />\r\n\r\nAFTER BEAUTIFY:\r\n<TextBlock x:Name=\"m_sample\" Text=\"asdf\" />\r\nDefault Value: 2")]
+        [Description("Defines the attribute number tolerance before XamlMagic starts to break attributes into new lines. A value less than 1 meaning no tolerance. \r\ne.g., when this setting is 2 \r\n\r\nBEFORE BEAUTIFY:\r\n<TextBlock x:Name=\"m_sample\"\r\n    Text=\"asdf\" />\r\n\r\nAFTER BEAUTIFY:\r\n<TextBlock x:Name=\"m_sample\" Text=\"asdf\" />\r\nDefault Value: 2")]
         [DefaultValue(2)]
         public int AttributesTolerance { get; set; }
 

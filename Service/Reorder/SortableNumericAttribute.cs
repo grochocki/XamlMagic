@@ -1,6 +1,6 @@
 using System;
 
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     public sealed class SortableNumericAttribute: ISortableAttribute
     {

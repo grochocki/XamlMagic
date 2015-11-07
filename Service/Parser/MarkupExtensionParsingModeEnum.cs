@@ -1,4 +1,4 @@
-﻿namespace XamlStyler.Service.Parser
+﻿namespace XamlMagic.Service.Parser
 {
     public enum MarkupExtensionParsingModeEnum
     {

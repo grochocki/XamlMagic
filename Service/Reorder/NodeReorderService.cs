@@ -3,7 +3,7 @@ using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     public sealed class NodeReorderService: IProcessElementService
     {

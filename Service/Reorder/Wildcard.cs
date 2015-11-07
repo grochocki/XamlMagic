@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     /// <summary>
     /// Create regular expression (RegEx) from simple "DOS" wildcard (* and ?).

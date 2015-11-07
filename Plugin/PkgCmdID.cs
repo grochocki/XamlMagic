@@ -1,7 +1,7 @@
 ﻿// PkgCmdID.cs
 // MUST match PkgCmdID.h
 
-namespace XamlStyler.Plugin
+namespace XamlMagic.Plugin
 {
     static class PkgCmdIDList
     {

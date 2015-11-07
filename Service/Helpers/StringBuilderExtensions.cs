@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Text;
 
-namespace XamlStyler.Service.Helpers
+namespace XamlMagic.Service.Helpers
 {
     public static class StringBuilderExtensions
     {

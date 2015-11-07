@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Reflection;
 using System.Text;
-using XamlStyler.Service.Model;
-using XamlStyler.Service.Parser;
+using XamlMagic.Service.Model;
+using XamlMagic.Service.Parser;
 
-namespace XamlStyler.Service.Helpers
+namespace XamlMagic.Service.Helpers
 {
     internal static class AttributeInfoExtension
     {

@@ -1,4 +1,4 @@
-namespace XamlStyler.Service.Options
+namespace XamlMagic.Service.Options
 {
     public enum LineBreakRule
     {

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace XamlStyler.Service.Model
+namespace XamlMagic.Service.Model
 {
     public sealed class AttributeInfo
     {

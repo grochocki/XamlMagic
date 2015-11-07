@@ -25,7 +25,7 @@
 
   <!--The Commands section is where we the commands, menus and menu groups are defined.
       This section uses a Guid to identify the package that provides the command defined inside it. -->
-  <Commands package="guidXamlStyler_PackagePkg">
+  <Commands package="guidXamlMagic_PackagePkg">
     <!-- Inside this section we have different sub-sections: one for the menus, another  
     for the menu groups, one for the buttons (the actual commands), one for the combos 
     and the last one for the bitmaps used. Each element is identified by a command id that  
@@ -40,7 +40,7 @@
          group as the part of a menu contained between two lines. The parent of a group 
          must be a menu. -->
     <Groups>
-      <Group guid="guidXamlStyler_PackageCmdSet" id="MyMenuGroup" priority="0x0001">
+      <Group guid="guidXamlMagic_PackageCmdSet" id="MyMenuGroup" priority="0x0001">
         <Parent guid="guidXamlEditorCmdSet" id="XamlEditorContextMenu"/>
       </Group>
     </Groups>
@@ -57,8 +57,8 @@
               <CommandFlag>DynamicVisibility</CommandFlag>
           If you do not want an image next to your command, remove the Icon node /> -->
 
-      <Button guid="guidXamlStyler_PackageCmdSet" id="cmdidBeautifyXaml" priority="0x0100" type="Button">
-        <Parent guid="guidXamlStyler_PackageCmdSet" id="MyMenuGroup" />
+      <Button guid="guidXamlMagic_PackageCmdSet" id="cmdidBeautifyXaml" priority="0x0100" type="Button">
+        <Parent guid="guidXamlMagic_PackageCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
           <CommandName>cmdidBeautifyXaml</CommandName>
@@ -79,15 +79,15 @@
   </Commands>
 
   <KeyBindings>
-    <KeyBinding guid="guidXamlStyler_PackageCmdSet" id="cmdidBeautifyXaml" editor="guidVSStd97" key1="K" mod1="Control" key2="2" mod2="Control" />
+    <KeyBinding guid="guidXamlMagic_PackageCmdSet" id="cmdidBeautifyXaml" editor="guidVSStd97" key1="K" mod1="Control" key2="2" mod2="Control" />
   </KeyBindings>
   
   <Symbols>
     <!-- This is the package guid. -->
-    <GuidSymbol name="guidXamlStyler_PackagePkg" value="{a224be3c-88d1-4a57-9804-181dbef68021}" />
+    <GuidSymbol name="guidXamlMagic_PackagePkg" value="{a224be3c-88d1-4a57-9804-181dbef68021}" />
 
     <!-- This is the guid used to group the menu commands together -->
-    <GuidSymbol name="guidXamlStyler_PackageCmdSet" value="{83fc41d5-eacb-4fa8-aaa3-9a9bdd5f6407}">
+    <GuidSymbol name="guidXamlMagic_PackageCmdSet" value="{83fc41d5-eacb-4fa8-aaa3-9a9bdd5f6407}">
       <IDSymbol name="MyMenuGroup" value="0x1020" />
       <IDSymbol name="cmdidBeautifyXaml" value="0x0100" />
     </GuidSymbol>

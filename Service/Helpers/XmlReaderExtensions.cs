@@ -1,6 +1,6 @@
 ﻿using System.Xml;
 
-namespace XamlStyler.Service.Helpers
+namespace XamlMagic.Service.Helpers
 {
     internal static class XmlReaderExtensions
     {

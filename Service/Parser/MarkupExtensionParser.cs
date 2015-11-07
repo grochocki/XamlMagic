@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using XamlStyler.Service.Helpers;
-using XamlStyler.Service.Model;
+using XamlMagic.Service.Helpers;
+using XamlMagic.Service.Model;
 
-namespace XamlStyler.Service.Parser
+namespace XamlMagic.Service.Parser
 {
     internal static class MarkupExtensionParser
     {

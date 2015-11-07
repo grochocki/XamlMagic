@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 using EnvDTE;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
-using XamlStyler.Service;
-using XamlStyler.Service.Options;
+using XamlMagic.Service;
+using XamlMagic.Service.Options;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace XamlStyler.Plugin
+namespace XamlMagic.Plugin
 {
     /// <summary>
     /// This is the class that implements the package exposed by this assembly.
@@ -35,7 +35,7 @@ namespace XamlStyler.Plugin
     [ProvideProfile(typeof (PackageOptions), "Xaml Styler", "Xaml Styler Settings", 106, 107, true,
         DescriptionResourceID = 108)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [Guid(GuidList.GuidXamlStylerPackagePkgString)]
+    [Guid(GuidList.GuidXamlMagicPackagePkgString)]
     public sealed class StylerPackage : Package //, IDTExtensibility2
     {
         private DTE dte;
@@ -93,7 +93,7 @@ namespace XamlStyler.Plugin
             if (menuCommandService != null)
             {
                 // Create the command for the menu item.
-                var menuCommandId = new CommandID(GuidList.GuidXamlStylerPackageCmdSet,
+                var menuCommandId = new CommandID(GuidList.GuidXamlMagicPackageCmdSet,
                     (int) PkgCmdIDList.cmdidBeautifyXaml);
                 var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandId);
                 menuCommandService.AddCommand(menuItem);
@@ -228,7 +228,7 @@ namespace XamlStyler.Plugin
                 string title = string.Format("Error in {0}:", GetType().Name);
                 string message = String.Format(
                     CultureInfo.CurrentCulture,
-                    "{0}\r\n\r\nIf this deems a malfunctioning of styler, please kindly submit an issue at https://github.com/dgrochocki/XamlStyler.",
+                    "{0}\r\n\r\nIf this deems a malfunctioning of styler, please kindly submit an issue at https://github.com/grochocki/XamlMagic.",
                     ex.Message);
 
                 this.ShowMessageBox(title, message);

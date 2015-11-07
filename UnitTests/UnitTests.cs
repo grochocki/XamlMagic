@@ -1,11 +1,11 @@
 ﻿using System.Text;
 using System.IO;
 using NUnit.Framework;
-using XamlStyler.Service;
-using XamlStyler.Service.Options;
-using XamlStyler.Service.Reorder;
+using XamlMagic.Service;
+using XamlMagic.Service.Options;
+using XamlMagic.Service.Reorder;
 
-namespace XamlStyler.UnitTests
+namespace XamlMagic.UnitTests
 {
     [TestFixture]
     public sealed class UnitTests

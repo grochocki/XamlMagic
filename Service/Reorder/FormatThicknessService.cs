@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
-using XamlStyler.Service.Helpers;
+using XamlMagic.Service.Helpers;
 
-namespace XamlStyler.Service.Reorder
+namespace XamlMagic.Service.Reorder
 {
     public sealed class FormatThicknessService : IProcessElementService
     {

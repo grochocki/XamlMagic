@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Xml;
 using System.Xml.Linq;
-using XamlStyler.Service.Helpers;
-using XamlStyler.Service.Model;
-using XamlStyler.Service.Options;
-using XamlStyler.Service.Parser;
-using XamlStyler.Service.Reorder;
+using XamlMagic.Service.Helpers;
+using XamlMagic.Service.Model;
+using XamlMagic.Service.Options;
+using XamlMagic.Service.Parser;
+using XamlMagic.Service.Reorder;
 
-namespace XamlStyler.Service
+namespace XamlMagic.Service
 {
     public class StylerService : XmlEscapingService
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using XamlStyler.Service.Model;
+using XamlMagic.Service.Model;
 
-namespace XamlStyler.Service.Helpers
+namespace XamlMagic.Service.Helpers
 {
     public static class MarkupExtensionInfoExtension
     {

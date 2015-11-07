@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using XamlStyler.Service.Reorder;
+using XamlMagic.Service.Reorder;
 
-namespace XamlStyler.Service.Helpers
+namespace XamlMagic.Service.Helpers
 {
     public static class StringExtension
     {

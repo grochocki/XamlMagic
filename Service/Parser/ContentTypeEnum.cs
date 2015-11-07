@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace XamlStyler.Service.Parser
+namespace XamlMagic.Service.Parser
 {
     [Flags]
     public enum ContentTypeEnum
