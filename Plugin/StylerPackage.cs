@@ -31,8 +31,8 @@ namespace XamlMagic.Plugin
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof (PackageOptions), "Xaml Styler", "General", 101, 106, true)]
-    [ProvideProfile(typeof (PackageOptions), "Xaml Styler", "Xaml Styler Settings", 106, 107, true,
+    [ProvideOptionPage(typeof (PackageOptions), "Xaml Magic", "General", 101, 106, true)]
+    [ProvideProfile(typeof (PackageOptions), "Xaml Magic", "Xaml Magic Settings", 106, 107, true,
         DescriptionResourceID = 108)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
     [Guid(GuidList.GuidXamlMagicPackagePkgString)]
