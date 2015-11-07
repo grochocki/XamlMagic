@@ -1,10 +1,10 @@
-XamlStyler
+XAML Magic
 ==========
 A fork of the Xaml Styler plugin found on https://github.com/NicoVermeir/XamlStyler. This fork has been created to accelerate development on the plugin originally created by Chris Chaochen (http://xamlstyler.codeplex.com) and further developed by NicoVermeir. This fork will only support Visual Studio 2015 and later. For Visual Studio 2012 support please install Chris's version. For other Visual Studio versions, consider installing Nico's version.
 
 Features
 ==========
-* Format/Beautify Xaml markup in one click. 
+* Format XAML markup with the push of a button.
 
 <img src="http://i59.tinypic.com/fehok3.jpg" alt="beautify option" />
 
@@ -60,26 +60,26 @@ Features
 </tbody>
 </table>
 
-* Indent Xaml markup based on "Tab Size/Indent Size/Indent Charater" settings available in "Option/Text Editor/XAML/Tabs" page. 
+* Indent XAML markup based on "Tab Size/Indent Size/Indent Charater" settings available in "Option/Text Editor/XAML/Tabs" page. 
 
 <img src="http://i60.tinypic.com/106x5pi.jpg" alt="markup settings" />
 
-* XamlStyler specific options. 
+* XAML Magic specific options. 
   * Define your own attribute ordering rules 
   * Define your own attribute line break rules 
   * Markup extension formatting 
-  * Automatically reformat Xaml file on saving 
+  * Automatically reformat XAML file on saving 
   
 <img src="http://i62.tinypic.com/11tbpqp.jpg" alt="xamlstyler options" /> 
   
-* Import/Export XamlStyler settings. 
+* Import/Export XAML Magic settings. 
 
 <img src="http://i59.tinypic.com/o8doon.jpg" alt="export settings" />
 
 Contribute
 ==========
 * Download the Visual Studio 2015 SDK from https://msdn.microsoft.com/en-us/library/bb166441.aspx
-* Fork the XamlStyler project into your own GitHub account
+* Fork the XamlMagic project into your own GitHub account
 * Develop some awesome features
 * Create a pull request when ready
 * Wait for us to merge your request
