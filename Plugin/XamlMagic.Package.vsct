@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+
+  <Commands package="PackageGuid">
+    <Groups>
+      <Group guid="PackageCommandSet" id="MenuGroup" priority="0x0001">
+        <Parent guid="XamlEditorCommandSet" id="XamlEditorContextMenu"/>
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="PackageCommandSet" id="FormatXamlCommand" priority="0x0100" type="Button">
+        <Parent guid="PackageCommandSet" id="MenuGroup" />
+        <Icon guid="CommandIcon" id="CommandIcon1" />
+        <Strings>
+          <CommandName>FormatXamlCommand</CommandName>
+          <ButtonText>Format XAML</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+
+    <Bitmaps>
+      <Bitmap guid="CommandIcon" href="Resources\CommandIcon.bmp" usedList="CommandIcon1"/>
+    </Bitmaps>
+  </Commands>
+
+  <KeyBindings>
+    <KeyBinding guid="PackageCommandSet" id="FormatXamlCommand" editor="guidVSStd97" key1="K" mod1="Control" key2="2" mod2="Control" />
+  </KeyBindings>
+  
+  <Symbols>
+    <GuidSymbol name="PackageGuid" value="{74FDBBF7-6350-4D00-B942-DB64A3B95754}" />
+
+    <GuidSymbol name="PackageCommandSet" value="{E271A88B-3A99-4836-9C05-76CBBA68AE59}">
+      <IDSymbol name="MenuGroup" value="0x1020" />
+      <IDSymbol name="FormatXamlCommand" value="0x0100" />
+    </GuidSymbol>
+
+    <!-- 
+      XAML Editor Context Menu - VS menu/command IDs identified via:
+      http://blogs.msdn.com/b/dr._ex/archive/2007/04/17/using-enablevsiplogging-to-identify-menus-and-commands-with-vs-2005-sp1.aspx
+    -->
+    <GuidSymbol name="XamlEditorCommandSet" value="{4C87B692-1202-46AA-B64C-EF01FAEC53DA}">
+      <IDSymbol name="XamlEditorContextMenu" value="0x0103" />
+    </GuidSymbol>
+
+    <GuidSymbol name="CommandIcon" value="{5E39A7B2-EC23-427B-949B-BC0B171C1E8E}" >
+      <IDSymbol name="CommandIcon1" value="1" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

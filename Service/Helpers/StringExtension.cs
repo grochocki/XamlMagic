@@ -40,7 +40,7 @@ namespace XamlMagic.Service.Helpers
 
         public static IList<string> ToList(this string source)
         {
-            return !string.IsNullOrEmpty(source)
+            return !String.IsNullOrEmpty(source)
                 ? source.Split(',')
                     .Where(_ => !String.IsNullOrWhiteSpace(_))
                     .Select(_ => _.Trim())
@@ -50,7 +50,7 @@ namespace XamlMagic.Service.Helpers
 
         public static IList<NameSelector> ToNameSelectorList(this string source)
         {
-            return !string.IsNullOrEmpty(source)
+            return !String.IsNullOrEmpty(source)
                 ? source.Split(',')
                     .Where(_ => !String.IsNullOrWhiteSpace(_))
                     .Select(_ => new NameSelector(_.Trim()))

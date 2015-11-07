@@ -5,16 +5,16 @@ namespace XamlMagic.Plugin
 {
     public class PackageOptions : DialogPage
     {
-        private readonly IStylerOptions _options;
+        private readonly IStylerOptions options;
 
         public PackageOptions()
         {
-            _options = new StylerOptions();
+            this.options = new StylerOptions();
         }
 
         public override object AutomationObject
         {
-            get { return _options; }
+            get { return this.options; }
         }
     }
 }

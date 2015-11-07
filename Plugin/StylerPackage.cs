@@ -1,42 +1,26 @@
-﻿using System;
+﻿using EnvDTE;
+using Microsoft.VisualStudio.Shell;
+using Microsoft.VisualStudio.Shell.Interop;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
-using EnvDTE;
-using Microsoft.VisualStudio.Shell;
-using Microsoft.VisualStudio.Shell.Interop;
+using System.Threading.Tasks;
 using XamlMagic.Service;
 using XamlMagic.Service.Options;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 
 namespace XamlMagic.Plugin
 {
-    /// <summary>
-    /// This is the class that implements the package exposed by this assembly.
-    ///
-    /// The minimum requirement for a class to be considered a valid package for Visual Studio
-    /// is to implement the IVsPackage interface and register itself with the shell.
-    /// This package uses the helper classes defined inside the Managed Package Framework (MPF)
-    /// to do it: it derives from the Package class that provides the implementation of the
-    /// IVsPackage interface and uses the registration attributes defined in the framework to
-    /// register itself and its components with the shell.
-    /// </summary>
-    // This attribute tells the PkgDef creation utility (CreatePkgDef.exe) that this class is
-    // a package.
-    // This attribute is used to register the informations needed to show the this package
-    // in the Help/About dialog of Visual Studio.
-    // This attribute is needed to let the shell know that this package exposes some menus.
     [PackageRegistration(UseManagedResourcesOnly = true)]
     [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
     [ProvideMenuResource("Menus.ctmenu", 1)]
-    [ProvideOptionPage(typeof (PackageOptions), "Xaml Magic", "General", 101, 106, true)]
-    [ProvideProfile(typeof (PackageOptions), "Xaml Magic", "Xaml Magic Settings", 106, 107, true,
-        DescriptionResourceID = 108)]
+    [ProvideOptionPage(typeof(PackageOptions), "XAML Magic", "General", 101, 106, true)]
+    [ProvideProfile(typeof(PackageOptions), "XAML Magic", "XAML Magic Settings", 106, 107, true, DescriptionResourceID = 108)]
     [ProvideAutoLoad(UIContextGuids80.SolutionExists)]
-    [Guid(GuidList.GuidXamlMagicPackagePkgString)]
-    public sealed class StylerPackage : Package //, IDTExtensibility2
+    [Guid(GuidList.XamlMagicPackagePackageString)]
+    public sealed class StylerPackage : Package
     {
         private DTE dte;
         private Events events;
@@ -44,25 +28,19 @@ namespace XamlMagic.Plugin
         private CommandEvents fileSaveSelectedItems;
         private IVsUIShell uiShell;
 
-        /// <summary>
-        /// Default constructor of the package.
-        /// Inside this method you can place any initialization code that does not require
-        /// any Visual Studio service because at this point the package object is created but
-        /// not sited yet inside Visual Studio environment. The place to do all the other
-        /// initialization is the Initialize method.
-        /// </summary>
         public StylerPackage()
         {
-            Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", ToString()));
+            // Put any initialization code that does not require VS service
+            // At this point, the package is created but not inside VS environment
+            // Put all other intialization in Initialize()
+            Trace.WriteLine(String.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", ToString()));
         }
 
-        /// <summary>
-        /// Initialization of the package; this method is called right after the package is sited, so this is the place
-        /// where you can put all the initilaization code that rely on services provided by VisualStudio.
-        /// </summary>
         protected override void Initialize()
         {
-            Trace.WriteLine(string.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", ToString()));
+            /// Initialization of the package; this method is called right after the package is sited, so this is the place
+            /// where you can put all the initilaization code that rely on services provided by VisualStudio.
+            Trace.WriteLine(String.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", ToString()));
             base.Initialize();
 
             this.dte = GetService(typeof (DTE)) as DTE;
@@ -93,8 +71,8 @@ namespace XamlMagic.Plugin
             if (menuCommandService != null)
             {
                 // Create the command for the menu item.
-                var menuCommandId = new CommandID(GuidList.GuidXamlMagicPackageCmdSet,
-                    (int) PkgCmdIDList.cmdidBeautifyXaml);
+                var menuCommandId = new CommandID(GuidList.XamlMagicPackageCommandSet,
+                    (int) PkgCmdIDList.FormatXamlCommand);
                 var menuItem = new MenuCommand(this.MenuItemCallback, menuCommandId);
                 menuCommandService.AddCommand(menuItem);
             }
@@ -162,7 +140,6 @@ namespace XamlMagic.Plugin
                     this.Execute(document);
                 }
             });
-
         }
 
         private void Execute(Document document)
@@ -215,7 +192,6 @@ namespace XamlMagic.Plugin
             try
             {
                 this.uiShell.SetWaitCursor();
-
                 Document document = this.dte.ActiveDocument;
 
                 if (this.IsFormatableDocument(document))
@@ -225,8 +201,8 @@ namespace XamlMagic.Plugin
             }
             catch (Exception ex)
             {
-                string title = string.Format("Error in {0}:", GetType().Name);
-                string message = String.Format(
+                var title = $"Error in {GetType().Name}:";
+                var message = String.Format(
                     CultureInfo.CurrentCulture,
                     "{0}\r\n\r\nIf this deems a malfunctioning of styler, please kindly submit an issue at https://github.com/grochocki/XamlMagic.",
                     ex.Message);

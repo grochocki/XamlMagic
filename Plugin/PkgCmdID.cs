@@ -5,6 +5,6 @@ namespace XamlMagic.Plugin
 {
     static class PkgCmdIDList
     {
-        public const uint cmdidBeautifyXaml = 0x100;
+        public const uint FormatXamlCommand = 0x100;
     };
 }
