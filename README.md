@@ -1,35 +1,35 @@
-XamlStyler
+XAML Magic
 ==========
-A fork of the Xaml Styler plugin found on https://github.com/NicoVermeir/XamlStyler. This fork has been created to accelerate development on the plugin originally created by Chris Chaochen (http://xamlstyler.codeplex.com) and further developed by NicoVermeir. This fork will only support Visual Studio 2015 and later. For Visual Studio 2012 support please install Chris's version. For other Visual Studio versions, consider installing Nico's version.
+A fork of the Xaml Styler plugin found on https://github.com/NicoVermeir/XamlStyler. This fork has been created to accelerate development on the plugin originally created by Chris Chaochen (http://xamlstyler.codeplex.com) and further developed by NicoVermeir. This fork will only officially support Visual Studio 2015 and later, though it may work on earlier versions of Visual Studio. For Visual Studio 2012 support please install Chris's version. For other Visual Studio versions, consider installing Nico's version.
 
 Features
 ==========
-* Format/Beautify Xaml markup in one click. 
+* Format XAML markup with the push of a button.
 
-<img src="http://i59.tinypic.com/fehok3.jpg" alt="beautify option" />
+<img src="http://i.imgur.com/4gHtXTX.png" alt="Context Menu" />
 
 * Sort attributes based on following rules:
-  * x:Class 
-  * XML Namespaces 
-    * WPF built-in namespaces 
-    *  User defined namespaces 
-  * Key, Name or Title attributes 
-    * x:Key 
-    * x:Name 
-    * Title 
-  * Grid or Canvas related attached layout attributes 
-    * Numeric layout attributes Width/MinWidth/MaxWidth 
-    * Height/MinHeight/MaxHeight 
-    * Margin 
-  * Alignment related attributes HorizontalAlignment/ContentHorizontalAlignment 
-    * VerticalAlignment/ContentVerticalAlignment 
-    * Panel.ZIndex 
-  * Other attributes 
-* Short attributes tolerance. 
-  * When an element contains 2 or less than 2 attributes, line break is not applied for * better readability. 
-* Special characters(e.g., &) are preserved. 
-* Respect "significant" whitespace situation. 
-  * No new linefeed will be added to <Run/>, if it is immediatly following *another element to prevent the rendering of unexpected space. 
+  * x:Class
+  * XML Namespaces
+    * WPF built-in namespaces
+    *  User defined namespaces
+  * Key, Name or Title attributes
+    * x:Key
+    * x:Name
+    * Title
+  * Grid or Canvas related attached layout attributes
+    * Numeric layout attributes Width/MinWidth/MaxWidth
+    * Height/MinHeight/MaxHeight
+    * Margin
+  * Alignment related attributes HorizontalAlignment/ContentHorizontalAlignment
+    * VerticalAlignment/ContentVerticalAlignment
+    * Panel.ZIndex
+  * Other attributes
+* Short attributes tolerance
+  * When an element contains 2 or less than 2 attributes, line break is not applied for * better readability
+* Special characters(e.g., &) are preserved
+* Respect "significant" whitespace situation
+  * No new linefeed will be added to <Run/>, if it is immediatly following *another element to prevent the rendering of unexpected space
 
 <table>
 <tbody>
@@ -60,26 +60,26 @@ Features
 </tbody>
 </table>
 
-* Indent Xaml markup based on "Tab Size/Indent Size/Indent Charater" settings available in "Option/Text Editor/XAML/Tabs" page. 
+* Indent XAML markup based on indentation settings available under Options > Text Editor > XAML > Tabs
 
-<img src="http://i60.tinypic.com/106x5pi.jpg" alt="markup settings" />
+<img src="http://i.imgur.com/N4I5C5W.png" alt="XAML Options" />
 
-* XamlStyler specific options. 
-  * Define your own attribute ordering rules 
-  * Define your own attribute line break rules 
-  * Markup extension formatting 
-  * Automatically reformat Xaml file on saving 
+* XAML Magic specific options:
+  * Define your own attribute ordering rules
+  * Define your own attribute line break rules
+  * Markup extension formatting
+  * Automatically reformat XAML file on saving
+
+<img src="http://i.imgur.com/khCcHF6.png" alt="XAML Magic Settings" />
   
-<img src="http://i62.tinypic.com/11tbpqp.jpg" alt="xamlstyler options" /> 
-  
-* Import/Export XamlStyler settings. 
+* Import/Export XAML Magic settings
 
-<img src="http://i59.tinypic.com/o8doon.jpg" alt="export settings" />
+<img src="http://i.imgur.com/3o6VMg9.png" alt="Export Settings" />
 
 Contribute
 ==========
 * Download the Visual Studio 2015 SDK from https://msdn.microsoft.com/en-us/library/bb166441.aspx
-* Fork the XamlStyler project into your own GitHub account
+* Fork the XamlMagic project into your own GitHub account
 * Develop some awesome features
 * Create a pull request when ready
 * Wait for us to merge your request
