@@ -4,10 +4,7 @@
     <Identity Id="74FDBBF7-6350-4D00-B942-DB64A3B95754" Version="1.0" Language="en-US" Publisher="Grochocki" />
     <DisplayName>XAML Magic</DisplayName>
     <Description xml:space="preserve">XAML Magic is a visual studio extension, which makes XAML markup source code beautify much easier by sorting the attributes based on their importance.
-This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.
-
-This is a fork of the Xaml Styler plugin found on https://github.com/NicoVermeir/XamlStyler, which was created to accelerate development on the plugin originally created by Chris Chaochen (http://xamlstyler.codeplex.com) and further developed by NicoVermeir.
-    </Description>
+This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.</Description>
     <MoreInfo>https://github.com/grochocki/XamlMagic</MoreInfo>
     <License>License.txt</License>
     <GettingStartedGuide>https://github.com/grochocki/XamlMagic</GettingStartedGuide>

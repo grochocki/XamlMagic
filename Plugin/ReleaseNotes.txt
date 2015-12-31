@@ -1,6 +1,7 @@
 ﻿1.0
 ----
 - Merged pending pull requests from XamlStyler
-- Cleaned up syntax for consitency
+- Updated default settings
+- Cleaned up syntax for consistency
 - Cleaned up namespaces
 - Cleaned up line endings

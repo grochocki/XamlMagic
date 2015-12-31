@@ -7,6 +7,6 @@
   <Grid>
     <TextBlock FontFamily="Arial"
                FontSize="18"
-               Text="{Binding Vm.test, Mode=TwoWay, Source={StaticResource Locator}, Converter={StaticResource Converter}}" />
+               Text="{Binding Vm.test, Mode=TwoWay, Source={StaticResource Locater}, Converter={StaticResource Converter}}" />
   </Grid>
 </Window>

@@ -11,7 +11,7 @@ namespace XamlMagic.Service.Helpers
         }
 
         /// <summary>
-        /// Get index of last occurence of char
+        /// Get index of last occurrence of char
         /// </summary>
         /// <param name="builder"></param>
         /// <param name="value"></param>

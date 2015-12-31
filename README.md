@@ -29,7 +29,7 @@ Features
   * When an element contains 2 or less than 2 attributes, line break is not applied for * better readability
 * Special characters(e.g., &) are preserved
 * Respect "significant" whitespace situation
-  * No new linefeed will be added to <Run/>, if it is immediatly following *another element to prevent the rendering of unexpected space
+  * No new linefeed will be added to <Run/>, if it is immediately following *another element to prevent the rendering of unexpected space
 
 <table>
 <tbody>

@@ -13,7 +13,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeThresholdHandling()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 AttributesTolerance = 0,
                 MaxAttributeCharatersPerLine = 80,
@@ -27,7 +27,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeToleranceHandling()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 AttributesTolerance = 3,
                 RootElementLineBreakRule = LineBreakRule.Always,
@@ -42,7 +42,7 @@ namespace XamlMagic.UnitTests
         [TestCase(3)]
         public void TestCommentHandling(byte testNumber)
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 CommentSpaces = testNumber,
             };
@@ -59,7 +59,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeSortingOptionHandling()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 AttributeOrderingRuleGroups = new[]
                 {
@@ -94,7 +94,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestxBindSplitting()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 NoNewLineMarkupExtensions = "x:Bind"
             };
@@ -105,7 +105,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestBindingSplitting()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 NoNewLineMarkupExtensions = "x:Bind, Binding"
             };
@@ -116,7 +116,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestMarkupExtensionHandling()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 FormatMarkupExtension = true
             };
@@ -127,7 +127,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestMarkupWithAttributeNotOnFirstLine()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 KeepFirstAttributeOnSameLine = false,
                 AttributesTolerance = 1
@@ -182,7 +182,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeOrderRuleGroupsOnSeparateLinesHandling()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 PutAttributeOrderRuleGroupsOnSeparateLines = true,
                 MaxAttributesPerLine = 3,
@@ -196,7 +196,7 @@ namespace XamlMagic.UnitTests
         [TestCase(ReorderSettersBy.TargetNameThenProperty)]
         public void TestReorderSetterHandling(ReorderSettersBy reorderSettersBy)
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 ReorderSetters = reorderSettersBy,
             };
@@ -208,7 +208,7 @@ namespace XamlMagic.UnitTests
         [TestCase(2, false)]
         public void TestClosingElementHandling(int testNumber, bool spaceBeforeClosingSlash)
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 SpaceBeforeClosingSlash = spaceBeforeClosingSlash
             };
@@ -233,7 +233,7 @@ namespace XamlMagic.UnitTests
         [TestCase(ThicknessStyle.Space)]
         public void TestThicknessHandling(ThicknessStyle thicknessStyle)
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 ThicknessStyle = thicknessStyle
             };
@@ -246,7 +246,7 @@ namespace XamlMagic.UnitTests
         [TestCase(3, LineBreakRule.Never)]
         public void TestRootHandling(int testNumber, LineBreakRule lineBreakRule)
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new LegacyStylerOptions
             {
                 AttributesTolerance = 3,
                 MaxAttributesPerLine = 4,
@@ -265,7 +265,7 @@ namespace XamlMagic.UnitTests
 
         private void DoTest([System.Runtime.CompilerServices.CallerMemberName] string callerMemberName = "")
         {
-            this.DoTest(new StylerOptions(), callerMemberName);
+            this.DoTest(new LegacyStylerOptions(), callerMemberName);
         }
 
         private void DoTest(StylerOptions stylerOptions, [System.Runtime.CompilerServices.CallerMemberName] string callerMemberName = "")
@@ -290,7 +290,7 @@ namespace XamlMagic.UnitTests
             
             var testFileResultBaseName = expectedSuffix != null ? testFileBaseName + "_" + expectedSuffix : testFileBaseName;
 
-            // Excercise stylerService using supplied test xaml data
+            // Exercise stylerService using supplied test XAML data
             string actualOutput = stylerService.ManipulateTreeAndFormatInput(File.ReadAllText(testFileBaseName + ".testxaml"));
 
             // Write output to ".actual" file for further investigation
@@ -298,6 +298,19 @@ namespace XamlMagic.UnitTests
 
             // Check result
             Assert.That(actualOutput, Is.EqualTo(File.ReadAllText(testFileResultBaseName + ".expected")));
+        }
+
+        // TODO - Update tests to work regardless of default settings
+        private class LegacyStylerOptions : StylerOptions
+        {
+            public LegacyStylerOptions() : base()
+            {
+                this.KeepFirstAttributeOnSameLine = true;
+                this.ReorderGridChildren = true;
+                this.ReorderCanvasChildren = true;
+                this.ThicknessStyle = ThicknessStyle.Comma;
+                this.BeautifyOnSave = true;
+            }
         }
     }
 }

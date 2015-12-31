@@ -83,7 +83,7 @@ namespace XamlMagic.Service.Options
 
         bool BeautifyOnSave { get; set; }
 
-        byte CommentSpaces { get; set; }
+        int CommentSpaces { get; set; }
 
         #endregion Misc
     }

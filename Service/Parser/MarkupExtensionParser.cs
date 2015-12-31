@@ -349,7 +349,7 @@ namespace XamlMagic.Service.Parser
                     }
                     break;
                 default:
-                    throw new InvalidDataException($"[{nameof(ReadValueString)}] Should not encouter parsingMode {parsingMode}");
+                    throw new InvalidDataException($"[{nameof(ReadValueString)}] Should not encounter parsingMode {parsingMode}");
             }
 
             return buffer.TrimUnescaped(' ').ToString();

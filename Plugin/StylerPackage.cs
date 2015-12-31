@@ -32,14 +32,14 @@ namespace XamlMagic.Plugin
         {
             // Put any initialization code that does not require VS service
             // At this point, the package is created but not inside VS environment
-            // Put all other intialization in Initialize()
+            // Put all other initialization in Initialize()
             Trace.WriteLine(String.Format(CultureInfo.CurrentCulture, "Entering constructor for: {0}", ToString()));
         }
 
         protected override void Initialize()
         {
             /// Initialization of the package; this method is called right after the package is sited, so this is the place
-            /// where you can put all the initilaization code that rely on services provided by VisualStudio.
+            /// where you can put all the initialization code that rely on services provided by VisualStudio.
             Trace.WriteLine(String.Format(CultureInfo.CurrentCulture, "Entering Initialize() of: {0}", ToString()));
             base.Initialize();
 

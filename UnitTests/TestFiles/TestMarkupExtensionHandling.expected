@@ -3,11 +3,11 @@
       xmlns:sys="clr-namespace:System;assembly=mscorlib"
       Title="Page Title">
   <Grid>
-    <!--  Tolarent element, no break line in markup extension  -->
+    <!--  Tolerant element, no break line in markup extension  -->
     <TextBlock Text="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=Title, StringFormat={}{0}Now{{0}} - {0}}" />
 
     <!--  Markup extension format  -->
-    <!--  Literal style (Stringformat with no text needs {} in front)  -->
+    <!--  Literal style (String format with no text needs {} in front)  -->
     <TextBlock HorizontalAlignment="Center"
                VerticalAlignment="Center"
                FontSize="20"
@@ -55,7 +55,7 @@
 
     <!--  Escape Sequence  -->
     <TextBlock x:Name="m_text"
-               Margin="20, 5"
+               Margin="20,5"
                HorizontalAlignment="Center"
                VerticalAlignment="Bottom"
                FontSize="20"
@@ -65,7 +65,7 @@
     <!--  Xml Namespace  -->
     <TextBlock Width="100" Text="{Binding Path=Element[{http://planetsNS}DiameterKM].Value}" />
     <TextBlock Width="100" Text="{Binding Path=Attribute[Name].Value}" />
-    <TextBlock Margin="20, 5"
+    <TextBlock Margin="20,5"
                HorizontalAlignment="Center"
                VerticalAlignment="Bottom"
                Text="{Binding Path=Element[{http://planetsNS}Details].Value,
