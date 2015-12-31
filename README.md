@@ -1,6 +1,8 @@
 XAML Magic
 ==========
-A fork of the Xaml Styler plugin found on https://github.com/NicoVermeir/XamlStyler. This fork has been created to accelerate development on the plugin originally created by Chris Chaochen (http://xamlstyler.codeplex.com) and further developed by NicoVermeir. This fork will only officially support Visual Studio 2015 and later, though it may work on earlier versions of Visual Studio. For Visual Studio 2012 support please install Chris's version. For other Visual Studio versions, consider installing Nico's version.
+XAML Magic is a visual studio extension, which formats XAML source code by sorting the attributes based on their importance. This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.
+
+This is a fork of the Xaml Styler plugin found on https://github.com/NicoVermeir/XamlStyler. This fork has been created to accelerate development on the plugin originally created by Chris Chaochen (http://xamlstyler.codeplex.com) and further developed by NicoVermeir. This fork will only officially support Visual Studio 2015 and later, though it may work on earlier versions of Visual Studio. For Visual Studio 2012 support please install Chris's version. For other Visual Studio versions, consider installing Nico's version.
 
 Features
 ==========
