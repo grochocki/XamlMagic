@@ -80,6 +80,11 @@ Features
 
 <img src="http://i.imgur.com/3o6VMg9.png" alt="Export Settings" />
 
+Change Log
+==========
+* Version 1.1 (1/4/2016)
+  * Added support for reordering visual state managers
+
 Contribute
 ==========
 * Download the Visual Studio 2015 SDK from https://msdn.microsoft.com/en-us/library/bb166441.aspx
