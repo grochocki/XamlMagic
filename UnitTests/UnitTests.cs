@@ -263,6 +263,34 @@ namespace XamlMagic.UnitTests
             this.DoTest();
         }
 
+        [Test]
+        public void TestVisualStateManagerDefault()
+        {
+            this.DoTest(new StylerOptions());
+        }
+
+        [Test]
+        public void TestVisualStateManagerFirst()
+        {
+            var stylerOptions = new StylerOptions
+            {
+                ReorderVSM = VisualStateManagerRule.First
+            };
+
+            this.DoTest(stylerOptions);
+        }
+
+        [Test]
+        public void TestVisualStateManagerLast()
+        {
+            var stylerOptions = new StylerOptions
+            {
+                ReorderVSM = VisualStateManagerRule.Last
+            };
+
+            this.DoTest(stylerOptions);
+        }
+
         private void DoTest([System.Runtime.CompilerServices.CallerMemberName] string callerMemberName = "")
         {
             this.DoTest(new LegacyStylerOptions(), callerMemberName);

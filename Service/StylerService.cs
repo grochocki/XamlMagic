@@ -33,6 +33,7 @@ namespace XamlMagic.Service
         {
             ProcessElementServices = new List<IProcessElementService>
             {
+                new VSMReorderService() { Mode = this.Options.ReorderVSM },
                 new FormatThicknessService(this.Options.ThicknessStyle, this.Options.ThicknessAttributes),
                 this.GetReorderGridChildrenService(),
                 this.GetReorderCanvasChildrenService(),

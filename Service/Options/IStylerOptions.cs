@@ -55,6 +55,8 @@ namespace XamlMagic.Service.Options
 
         #region Element reordering
 
+        VisualStateManagerRule ReorderVSM { get; set; }
+
         bool ReorderGridChildren { get; set; }
 
         bool ReorderCanvasChildren { get; set; }

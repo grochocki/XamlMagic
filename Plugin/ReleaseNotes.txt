@@ -1,4 +1,8 @@
-﻿1.0
+﻿1.1
+----
+- Added support for reordering visual state managers
+
+1.0
 ----
 - Merged pending pull requests from XamlStyler
 - Updated default settings

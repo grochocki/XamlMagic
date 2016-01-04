@@ -143,6 +143,12 @@ namespace XamlMagic.Service.Options
         // Element reordering
 
         [Category("Element Reordering")]
+        [DisplayName("Reorder visual state manager")]
+        [Description("Defines whether to reorder the visual state manager. When set to first or last, the visual state manager will be moved to the first or last child element in its parent, respectively, otherwise it will not be moved.\r\n\r\nDefault Value: None")]
+        [DefaultValue(VisualStateManagerRule.None)]
+        public VisualStateManagerRule ReorderVSM { get; set; }
+
+        [Category("Element Reordering")]
         [DisplayName("Reorder grid panel children by row/column")]
         [Description("Defines whether to reorder the children of a Grid by row/column. When true, children will be reordered in an ascending fashion by looking first at Grid.Row, then by Grid.Column.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
