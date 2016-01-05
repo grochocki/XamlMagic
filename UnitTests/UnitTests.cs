@@ -274,7 +274,10 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestVisualStateManagerDefault()
         {
-            this.DoTest(new StylerOptions());
+            this.DoTest(new StylerOptions()
+            {
+                AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups
+            });
         }
 
         [Test]
@@ -282,6 +285,7 @@ namespace XamlMagic.UnitTests
         {
             var stylerOptions = new StylerOptions
             {
+                AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups,
                 ReorderVSM = VisualStateManagerRule.First
             };
 
@@ -293,6 +297,7 @@ namespace XamlMagic.UnitTests
         {
             var stylerOptions = new StylerOptions
             {
+                AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups,
                 ReorderVSM = VisualStateManagerRule.Last
             };
 
@@ -341,12 +346,28 @@ namespace XamlMagic.UnitTests
         {
             public LegacyStylerOptions() : base()
             {
+                this.AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups;
                 this.KeepFirstAttributeOnSameLine = true;
                 this.ReorderGridChildren = true;
                 this.ReorderCanvasChildren = true;
                 this.ThicknessStyle = ThicknessStyle.Comma;
                 this.BeautifyOnSave = true;
             }
+
+            public static string[] LegacyAttributeOrderingRuleGroups = new[]
+            {
+                "x:Class",
+                "xmlns, xmlns:x",
+                "xmlns:*",
+                "Key, x:Key, Uid, x:Uid",
+                "Name, x:Name, Title",
+                "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
+                "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight, Margin",
+                "HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
+                "*:*, *",
+                "PageSource, PageIndex, Offset, Color, TargetName, Property, Value, StartPoint, EndPoint",
+                "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText",
+            };
         }
     }
 }

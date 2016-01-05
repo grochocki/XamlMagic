@@ -98,7 +98,7 @@ namespace XamlMagic.Service.Options
             // Core layout group
             "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight, Margin",
             // Alignment layout group
-            "HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
+            "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
             // Unmatched
             "*:*, *",
             // Miscellaneous/Other attributes group

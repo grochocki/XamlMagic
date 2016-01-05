@@ -23,7 +23,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>XamlMagic.Plugin</RootNamespace>
-    <AssemblyName>Package</AssemblyName>
+    <AssemblyName>Plugin</AssemblyName>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Key.pfx</AssemblyOriginatorKeyFile>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

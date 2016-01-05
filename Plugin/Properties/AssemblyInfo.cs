@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Plugin")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("XAML Magic")]
+[assembly: AssemblyDescription("XAML Magic is a visual studio extension, which formats XAML source code by sorting the attributes based on their importance. This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Grochocki")]
-[assembly: AssemblyProduct("XamlMagic")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyProduct("XAML Magic")]
+[assembly: AssemblyCopyright("Copyright © 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
