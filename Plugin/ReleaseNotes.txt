@@ -1,4 +1,8 @@
-﻿1.1
+﻿1.2
+----
+- Default setting for list of markup extensions with no newlines to include regular Binding 
+
+1.1
 ----
 - Added support for reordering visual state managers
 

@@ -118,7 +118,8 @@ namespace XamlMagic.UnitTests
         {
             var stylerOptions = new LegacyStylerOptions
             {
-                FormatMarkupExtension = true
+                FormatMarkupExtension = true,
+                NoNewLineMarkupExtensions = "x:Bind"
             };
 
             this.DoTest(stylerOptions);
@@ -130,7 +131,8 @@ namespace XamlMagic.UnitTests
             var stylerOptions = new LegacyStylerOptions
             {
                 KeepFirstAttributeOnSameLine = false,
-                AttributesTolerance = 1
+                AttributesTolerance = 1,
+                NoNewLineMarkupExtensions = "x:Bind"
             };
 
             this.DoTest(stylerOptions);
@@ -176,7 +178,12 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestNestedPropertiesAndChildrenHandling()
         {
-            this.DoTest();
+            var stylerOptions = new LegacyStylerOptions
+            {
+                NoNewLineMarkupExtensions = "x:Bind"
+            };
+
+            this.DoTest(stylerOptions);
         }
 
         [Test]
@@ -199,6 +206,7 @@ namespace XamlMagic.UnitTests
             var stylerOptions = new LegacyStylerOptions
             {
                 ReorderSetters = reorderSettersBy,
+                NoNewLineMarkupExtensions = "x:Bind"
             };
 
             this.DoTestCase(stylerOptions, reorderSettersBy);

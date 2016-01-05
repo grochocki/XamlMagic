@@ -176,8 +176,8 @@ namespace XamlMagic.Service.Options
 
         [Category("Markup Extension")]
         [DisplayName("Keep markup extensions of these types on one line")]
-        [Description("Defines a comma-separated list of Markup Extensions that are always kept on a single line\r\n\r\nDefault Value: x:Bind")]
-        [DefaultValue("x:Bind")]
+        [Description("Defines a comma-separated list of Markup Extensions that are always kept on a single line\r\n\r\nDefault Value: x:Bind, Binding")]
+        [DefaultValue("x:Bind, Binding")]
         public string NoNewLineMarkupExtensions { get; set; }
 
         // Thickness formatting
