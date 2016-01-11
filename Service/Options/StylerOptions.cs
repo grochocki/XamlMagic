@@ -25,7 +25,7 @@ namespace XamlMagic.Service.Options
         [DefaultValue(2)]
         [Browsable(false)]
         [JsonIgnore]
-        public int IndentSize { get; set; }
+        public int IndentSize { get; set; } = 2;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue(false)]

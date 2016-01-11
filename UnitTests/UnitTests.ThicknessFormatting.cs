@@ -4,18 +4,31 @@ using XamlMagic.Service.Reorder;
 namespace XamlMagic.UnitTests
 {
     [TestFixture]
-    public sealed class ThicknessFormatterUnitTests
+    public sealed partial class UnitTests
     {
-        [TestCase(" 123",' ',"123")]
-        [TestCase(" 1.5 ",' ',"1.5")]
-        [TestCase(" 1.5 ",',',"1.5")]
-        [TestCase("1,2",' ',"1 2")]
-        [TestCase("1,2",',',"1,2")]
-        [TestCase("1 2",',',"1,2")]
-        [TestCase("1 2",' ',"1 2")]
+        [TestCase(ThicknessStyle.None)]
+        [TestCase(ThicknessStyle.Comma)]
+        [TestCase(ThicknessStyle.Space)]
+        public void TestThicknessHandling(ThicknessStyle thicknessStyle)
+        {
+            var stylerOptions = new LegacyStylerOptions
+            {
+                ThicknessStyle = thicknessStyle
+            };
+
+            this.DoTestCase(stylerOptions, thicknessStyle);
+        }
+
+        [TestCase(" 123", ' ', "123")]
+        [TestCase(" 1.5 ", ' ', "1.5")]
+        [TestCase(" 1.5 ", ',', "1.5")]
+        [TestCase("1,2", ' ', "1 2")]
+        [TestCase("1,2", ',', "1,2")]
+        [TestCase("1 2", ',', "1,2")]
+        [TestCase("1 2", ' ', "1 2")]
         [TestCase("1.5 2.5 ", ',', "1.5,2.5")]
-        [TestCase("1 2 3",' ',null)]
-        [TestCase("1 2 3",',',null)]
+        [TestCase("1 2 3", ' ', null)]
+        [TestCase("1 2 3", ',', null)]
         [TestCase("1,2,3,4", ' ', "1 2 3 4")]
         [TestCase("1,2,3,4", ',', "1,2,3,4")]
         [TestCase("1 2 3 4", ',', "1,2,3,4")]

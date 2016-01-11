@@ -69,8 +69,28 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ThicknessFormatterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTests.Misc.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests.ThicknessFormatting.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests.MarkupExtensions.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests.ElementReordering.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests.ElementFormatting.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests.AttributeReordering.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UnitTests.AttributeFormatting.cs">
+      <DependentUpon>UnitTests.cs</DependentUpon>
+    </Compile>
     <Compile Include="UnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
