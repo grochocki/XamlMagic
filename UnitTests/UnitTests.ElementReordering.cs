@@ -35,7 +35,7 @@ namespace XamlMagic.UnitTests
         [TestCase(ReorderSettersBy.TargetNameThenProperty)]
         public void TestReorderSetterHandling(ReorderSettersBy reorderSettersBy)
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 ReorderSetters = reorderSettersBy,
                 NoNewLineMarkupExtensions = "x:Bind"
@@ -47,20 +47,15 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestVisualStateManagerDefault()
         {
-            var stylerOptions = new StylerOptions
-            {
-                AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups
-            };
-
+            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig);
             this.DoTest(stylerOptions);
         }
 
         [Test]
         public void TestVisualStateManagerFirst()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig)
             {
-                AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups,
                 ReorderVSM = VisualStateManagerRule.First
             };
 
@@ -70,9 +65,8 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestVisualStateManagerLast()
         {
-            var stylerOptions = new StylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig)
             {
-                AttributeOrderingRuleGroups = LegacyStylerOptions.LegacyAttributeOrderingRuleGroups,
                 ReorderVSM = VisualStateManagerRule.Last
             };
 

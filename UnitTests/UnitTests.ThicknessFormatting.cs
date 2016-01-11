@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using XamlMagic.Service.Options;
 using XamlMagic.Service.Reorder;
 
 namespace XamlMagic.UnitTests
@@ -11,7 +12,7 @@ namespace XamlMagic.UnitTests
         [TestCase(ThicknessStyle.Space)]
         public void TestThicknessHandling(ThicknessStyle thicknessStyle)
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 ThicknessStyle = thicknessStyle
             };

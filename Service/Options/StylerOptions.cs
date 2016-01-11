@@ -11,11 +11,55 @@ namespace XamlMagic.Service.Options
     {
         private const string DefaultOptiosnPath = "XamlMagic.Service.Options.DefaultSettings.json";
 
+        private readonly string[] DefaultAttributeOrderingRuleGroups = new string[]
+        {
+            // Class definition group
+            "x:Class",
+            // WPF Namespaces group
+            "xmlns, xmlns:x",
+            // Other namespace
+            "xmlns:*",
+            // Element key group
+            "Key, x:Key, Uid, x:Uid",
+            // Element name group
+            "Name, x:Name, Title",
+            // Attached layout group
+            "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
+            // Core layout group
+            "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight",
+            // Alignment layout group
+            "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
+            // Unmatched
+            "*:*, *",
+            // Miscellaneous/Other attributes group
+            "PageSource, PageIndex, Offset, Color, TargetName, Property, Value, StartPoint, EndPoint",
+            // Blend related group
+            "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText",
+        };
+
         public StylerOptions()
         {
             this.InitializeProperties();
         }
 
+        /// <summary>
+        /// Constructor that accepts an external configuration path before initializing settings.
+        /// </summary>
+        /// <param name="config">Path to external configuration file.</param>
+        public StylerOptions(string config = "")
+        {
+            if (!String.IsNullOrWhiteSpace(config) && File.Exists(config))
+            {
+                this.ConfigPath = config;
+            }
+
+            this.InitializeProperties();
+        }
+
+        /// <summary>
+        /// JSON Constructor required to prevent an infinite loop during deserialization.
+        /// </summary>
+        /// <param name="isJsonConstructor">Dummy parameter to differentiate from default constructor.</param>
         [JsonConstructor]
         public StylerOptions(bool isJsonConstructor = true) { }
 
@@ -278,59 +322,52 @@ namespace XamlMagic.Service.Options
             try
             {
                 StylerOptions configOptions = JsonConvert.DeserializeObject<StylerOptions>(config);
-                foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
+
+                if (configOptions == null)
                 {
-                    if (!propertyDescriptor.Name.Equals(nameof(this.ConfigPath)))
+                    this.LoadFallbackConfiguration();
+                }
+                else
+                {
+                    foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
                     {
-                        propertyDescriptor.SetValue(this, propertyDescriptor.GetValue(configOptions));
+                        if (!propertyDescriptor.Name.Equals(nameof(this.ConfigPath)))
+                        {
+                            propertyDescriptor.SetValue(this, propertyDescriptor.GetValue(configOptions));
+                        }
+                    }
+
+                    if (this.AttributeOrderingRuleGroups == null)
+                    {
+                        this.AttributeOrderingRuleGroups = this.DefaultAttributeOrderingRuleGroups;
                     }
                 }
             }
             catch (Exception)
             {
-                // Initialize all properties with "DefaultValueAttrbute" to their default value
-                foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
-                {
-                    // Set default value if DefaultValueAttribute is present
-                    DefaultValueAttribute attribute
-                        = propertyDescriptor.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
-
-                    if (attribute != null)
-                    {
-                        propertyDescriptor.SetValue(this, attribute.Value);
-                    }
-                }
-
-                this.AttributeOrderingRuleGroups = new string[]
-                {
-                    // Class definition group
-                    "x:Class",
-                    // WPF Namespaces group
-                    "xmlns, xmlns:x",
-                    // Other namespace
-                    "xmlns:*",
-                    // Element key group
-                    "Key, x:Key, Uid, x:Uid",
-                    // Element name group
-                    "Name, x:Name, Title",
-                    // Attached layout group
-                    "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
-                    // Core layout group
-                    "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight",
-                    // Alignment layout group
-                    "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
-                    // Unmatched
-                    "*:*, *",
-                    // Miscellaneous/Other attributes group
-                    "PageSource, PageIndex, Offset, Color, TargetName, Property, Value, StartPoint, EndPoint",
-                    // Blend related group
-                    "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText",
-                };
-
+                this.LoadFallbackConfiguration();
                 return false;
             }
 
             return true;
+        }
+
+        private void LoadFallbackConfiguration()
+        {
+            // Initialize all properties with "DefaultValueAttrbute" to their default value
+            foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
+            {
+                // Set default value if DefaultValueAttribute is present
+                DefaultValueAttribute attribute
+                    = propertyDescriptor.Attributes[typeof(DefaultValueAttribute)] as DefaultValueAttribute;
+
+                if (attribute != null)
+                {
+                    propertyDescriptor.SetValue(this, attribute.Value);
+                }
+            }
+
+            this.AttributeOrderingRuleGroups = this.DefaultAttributeOrderingRuleGroups;
         }
     }
 }

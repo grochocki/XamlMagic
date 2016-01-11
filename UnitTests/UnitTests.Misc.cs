@@ -27,7 +27,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestNestedPropertiesAndChildrenHandling()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 NoNewLineMarkupExtensions = "x:Bind"
             };
@@ -40,7 +40,7 @@ namespace XamlMagic.UnitTests
         [TestCase(3, LineBreakRule.Never)]
         public void TestRootHandling(int testNumber, LineBreakRule lineBreakRule)
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 AttributesTolerance = 3,
                 MaxAttributesPerLine = 4,
@@ -63,7 +63,7 @@ namespace XamlMagic.UnitTests
         [TestCase(3)]
         public void TestCommentHandling(byte testNumber)
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 CommentSpaces = testNumber,
             };

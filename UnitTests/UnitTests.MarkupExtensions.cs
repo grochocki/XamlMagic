@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using XamlMagic.Service.Options;
 
 namespace XamlMagic.UnitTests
 {
@@ -8,7 +9,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestxBindSplitting()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 NoNewLineMarkupExtensions = "x:Bind"
             };
@@ -19,7 +20,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestBindingSplitting()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 NoNewLineMarkupExtensions = "x:Bind, Binding"
             };
@@ -30,7 +31,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestMarkupExtensionHandling()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 FormatMarkupExtension = true,
                 NoNewLineMarkupExtensions = "x:Bind"
@@ -42,7 +43,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestMarkupWithAttributeNotOnFirstLine()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 KeepFirstAttributeOnSameLine = false,
                 AttributesTolerance = 1,

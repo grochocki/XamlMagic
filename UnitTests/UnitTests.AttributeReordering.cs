@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using XamlMagic.Service.Options;
 
 namespace XamlMagic.UnitTests
 {
@@ -8,7 +9,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeSortingOptionHandling()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 AttributeOrderingRuleGroups = new[]
                 {

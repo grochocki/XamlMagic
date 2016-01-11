@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using XamlMagic.Service.Options;
 
 namespace XamlMagic.UnitTests
 {
@@ -9,7 +10,7 @@ namespace XamlMagic.UnitTests
         [TestCase(2, false)]
         public void TestClosingElementHandling(int testNumber, bool spaceBeforeClosingSlash)
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 SpaceBeforeClosingSlash = spaceBeforeClosingSlash
             };

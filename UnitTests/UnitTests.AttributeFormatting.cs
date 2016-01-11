@@ -9,7 +9,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeThresholdHandling()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 AttributesTolerance = 0,
                 MaxAttributeCharatersPerLine = 80,
@@ -23,7 +23,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeOrderRuleGroupsOnSeparateLinesHandling()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 PutAttributeOrderRuleGroupsOnSeparateLines = true,
                 MaxAttributesPerLine = 3,
@@ -35,7 +35,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttributeToleranceHandling()
         {
-            var stylerOptions = new LegacyStylerOptions
+            var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
                 AttributesTolerance = 3,
                 RootElementLineBreakRule = LineBreakRule.Always,
