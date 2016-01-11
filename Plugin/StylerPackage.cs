@@ -120,7 +120,7 @@ namespace XamlMagic.Plugin
             object customOut,
             ref bool cancelDefault)
         {
-            // use parallel processing, but only on the documents that are formatable 
+            // Use parallel processing, but only on the documents that can be formatted 
             // (to avoid the overhead of Task creating when it's not necessary)
 
             List<Document> docs = new List<Document>();
@@ -151,7 +151,7 @@ namespace XamlMagic.Plugin
 
             Properties xamlEditorProps = this.dte.Properties["TextEditor", "XAML"];
 
-            var stylerOptions = GetDialogPage(typeof (PackageOptions)).AutomationObject as IStylerOptions;
+            var stylerOptions = GetDialogPage(typeof(PackageOptions)).AutomationObject as IStylerOptions;
 
             stylerOptions.IndentSize = Int32.Parse(xamlEditorProps.Item("IndentSize").Value.ToString());
             stylerOptions.IndentWithTabs = (bool) xamlEditorProps.Item("InsertTabs").Value;
