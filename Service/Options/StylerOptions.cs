@@ -19,21 +19,23 @@ namespace XamlMagic.Service.Options
             "xmlns, xmlns:x",
             // Other namespace
             "xmlns:*",
-            // Element key group
-            "Key, x:Key, Uid, x:Uid",
-            // Element name group
-            "Name, x:Name, Title",
+            // Element key and name group
+            "x:Key, Key, x:Name, Name, x:Uid, Uid, Title",
             // Attached layout group
             "Grid.Row, Grid.RowSpan, Grid.Column, Grid.ColumnSpan, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
             // Core layout group
             "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight",
             // Alignment layout group
             "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
+            // Visual styling group
+            "Style, Background, Foreground, Fill, BorderBrush, BorderThickness, Stroke, StrokeThickness, Opacity",
+            // Font property group
+            "FontFamily, FontSize, LineHeight, FontWeight, FontStyle, FontStretch",
             // Unmatched
             "*:*, *",
             // Miscellaneous/Other attributes group
             "PageSource, PageIndex, Offset, Color, TargetName, Property, Value, StartPoint, EndPoint",
-            // Blend related group
+            // Blend-related group
             "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText",
         };
 
