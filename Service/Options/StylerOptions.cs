@@ -136,6 +136,31 @@ namespace XamlMagic.Service.Options
         [Description("Defines attribute ordering rule groups. Each string element is one group. Use ',' as a delimiter between attributes. 'DOS' wildcards are allowed. XamlMagic will order attributes in groups from top to bottom, and within groups left to right.")]
         public string[] AttributeOrderingRuleGroups { get; set; }
 
+        private string serializedAttributeOrderingRuleGroups;
+
+        /// <summary>
+        /// We must serialize AttributeOrderingRuleGroups in order for Visual Studio to support exporting this
+        /// setting. This property should not be used in JSON configuration processing.
+        /// </summary>
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [Browsable(false)]
+        [JsonIgnore]
+        public string SerializedAttributeOrderingRuleGroups
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(this.AttributeOrderingRuleGroups);
+            }
+            set
+            {
+                if (this.serializedAttributeOrderingRuleGroups != value)
+                {
+                    this.serializedAttributeOrderingRuleGroups = value;
+                    this.AttributeOrderingRuleGroups = JsonConvert.DeserializeObject<string[]>(value);
+                }
+            }
+        }
+
         [Category("Attribute Reordering")]
         [DisplayName("Order attributes by name")]
         [JsonProperty("OrderAttributesByName", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
@@ -331,10 +356,13 @@ namespace XamlMagic.Service.Options
                 {
                     foreach (PropertyDescriptor propertyDescriptor in TypeDescriptor.GetProperties(this))
                     {
-                        if (!propertyDescriptor.Name.Equals(nameof(this.ConfigPath)))
+                        if (propertyDescriptor.Name.Equals(nameof(this.SerializedAttributeOrderingRuleGroups))
+                            || propertyDescriptor.Name.Equals(nameof(this.ConfigPath)))
                         {
-                            propertyDescriptor.SetValue(this, propertyDescriptor.GetValue(configOptions));
+                            continue;
                         }
+
+                        propertyDescriptor.SetValue(this, propertyDescriptor.GetValue(configOptions));
                     }
 
                     if (this.AttributeOrderingRuleGroups == null)
