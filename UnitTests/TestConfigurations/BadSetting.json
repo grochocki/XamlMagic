@@ -24,7 +24,7 @@
     "RemoveEndingTagOfEmptyElement": true,
     "SpaceBeforeClosingSlash": true,
     "RootElementLineBreakRule": 0,
-    "ReorderVSM": 0,
+    "ReorderVSM": 2,
     "ReorderGridChildren": false,
     "ReorderCanvasChildren": false,
     "ReorderSetters": 0,

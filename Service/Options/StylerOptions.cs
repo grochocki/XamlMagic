@@ -9,7 +9,7 @@ namespace XamlMagic.Service.Options
 {
     public class StylerOptions : IStylerOptions
     {
-        private const string DefaultOptiosnPath = "XamlMagic.Service.Options.DefaultSettings.json";
+        private const string DefaultOptionsPath = "XamlMagic.Service.Options.DefaultSettings.json";
 
         private readonly string[] DefaultAttributeOrderingRuleGroups = new string[]
         {
@@ -204,7 +204,7 @@ namespace XamlMagic.Service.Options
         [DisplayName("Reorder visual state manager")]
         [JsonProperty("ReorderVSM", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to reorder the visual state manager. When set to first or last, the visual state manager will be moved to the first or last child element in its parent, respectively, otherwise it will not be moved.\r\n\r\nDefault Value: None")]
-        [DefaultValue(VisualStateManagerRule.None)]
+        [DefaultValue(VisualStateManagerRule.Last)]
         public VisualStateManagerRule ReorderVSM { get; set; }
 
         [Category("Element Reordering")]
@@ -324,7 +324,7 @@ namespace XamlMagic.Service.Options
             if (!this.TryLoadExternalConfiguration())
             {
                 var assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream(StylerOptions.DefaultOptiosnPath))
+                using (Stream stream = assembly.GetManifestResourceStream(StylerOptions.DefaultOptionsPath))
                 using (StreamReader reader = new StreamReader(stream))
                 {
                     this.LoadConfiguration(reader.ReadToEnd());

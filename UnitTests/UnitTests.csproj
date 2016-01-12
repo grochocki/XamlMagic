@@ -179,10 +179,10 @@
     <None Include="TestFiles\TestThicknessHandling.testxaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\TestVisualStateManagerDefault.expected">
+    <None Include="TestFiles\TestVisualStateManagerNone.expected">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="TestFiles\TestVisualStateManagerDefault.testxaml">
+    <None Include="TestFiles\TestVisualStateManagerNone.testxaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="TestFiles\TestVisualStateManagerFirst.testxaml">

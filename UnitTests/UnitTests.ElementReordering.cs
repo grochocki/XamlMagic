@@ -45,9 +45,12 @@ namespace XamlMagic.UnitTests
         }
 
         [Test]
-        public void TestVisualStateManagerDefault()
+        public void TestVisualStateManagerNone()
         {
-            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig);
+            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig)
+            {
+                ReorderVSM = VisualStateManagerRule.None
+            };
             this.DoTest(stylerOptions);
         }
 
@@ -65,11 +68,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestVisualStateManagerLast()
         {
-            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig)
-            {
-                ReorderVSM = VisualStateManagerRule.Last
-            };
-
+            var stylerOptions = new StylerOptions(config: this.legacyAttributeOrderingConfig);
             this.DoTest(stylerOptions);
         }
     }

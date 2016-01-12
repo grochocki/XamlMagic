@@ -14,5 +14,6 @@
         "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText"
     ],
     "ReorderGridChildren": true,
-    "ReorderCanvasChildren": true
+    "ReorderCanvasChildren": true,
+    "ReorderVSM": 0
 }
