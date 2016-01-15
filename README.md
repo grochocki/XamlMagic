@@ -8,3 +8,5 @@ XAML Magic is a visual studio extension, which formats XAML source code by sorti
 **Change Log:** [XAML Magic Change Log](https://github.com/grochocki/XamlMagic/wiki/Change-Log)
 
 **Contributing:** [CONTRIBUTING.md](https://github.com/grochocki/XamlMagic/blob/master/CONTRIBUTING.md)
+
+<sub>XAML Magic is a fork of [XamlStyler](https://github.com/NicoVermeir/XamlStyler)<sub>
