@@ -145,6 +145,7 @@ namespace XamlMagic.Service.Options
         /// setting. This property should not be used in JSON configuration processing.
         /// </summary>
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
+        [DefaultValue("")]
         [Browsable(false)]
         [JsonIgnore]
         public string SerializedAttributeOrderingRuleGroups
@@ -205,7 +206,7 @@ namespace XamlMagic.Service.Options
         [Category("Element Reordering")]
         [DisplayName("Reorder visual state manager")]
         [JsonProperty("ReorderVSM", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [Description("Defines whether to reorder the visual state manager. When set to first or last, the visual state manager will be moved to the first or last child element in its parent, respectively, otherwise it will not be moved.\r\n\r\nDefault Value: None")]
+        [Description("Defines whether to reorder the visual state manager. When set to first or last, the visual state manager will be moved to the first or last child element in its parent, respectively, otherwise it will not be moved.\r\n\r\nDefault Value: Last")]
         [DefaultValue(VisualStateManagerRule.Last)]
         public VisualStateManagerRule ReorderVSM { get; set; }
 
