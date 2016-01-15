@@ -84,44 +84,44 @@ namespace XamlMagic.Service.Options
         [Category("Attribute Formatting")]
         [DisplayName("Attribute tolerance")]
         [JsonProperty("AttributesTolerance", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [Description("Defines the maximum number of attributes allowed on a single line. If the number of attributes exceeds this value, XamlMagic will break the attributes up across multiple lines. A value of less than 1 means always break up the attributes.\r\n\r\nDefault Value: 2")]
+        [Description("Defines the maximum number of attributes allowed on a single line. If the number of attributes exceeds this value, XAML Magic will break the attributes up across multiple lines. A value of less than 1 means always break up the attributes.\r\n\r\nDefault Value: 2")]
         [DefaultValue(2)]
         public int AttributesTolerance { get; set; }
 
         [Category("Attribute Formatting")]
-        [DisplayName("Position first attribute on same line as start tag")]
+        [DisplayName("Keep First Attribute On Same Line")]
         [JsonProperty("KeepFirstAttributeOnSameLine", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether the first line of attribute(s) should appear on the same line as the element's start tag.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
         public bool KeepFirstAttributeOnSameLine { get; set; }
 
         [Category("Attribute Formatting")]
-        [DisplayName("Max attribute characters per line")]
+        [DisplayName("Max Attribute Characters Per Line")]
         [JsonProperty("MaxAttributeCharatersPerLine", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [Description("Defines the maximum character length (not including indentation characters) of attributes an element can have on each line after the start tag. A value of less than 1 means no limit.\r\n\r\nDefault Value: 0")]
+        [Description("Defines the maximum character length of attributes an element can have on each line after the start tag (not including indentation characters). A value of less than 1 means no limit. Note: This setting only takes effect if Max Attributes Per Line is greater than 1 and Attribute Tolerance is greater than 2.\r\n\r\nDefault Value: 0")]
         [DefaultValue(0)]
         public int MaxAttributeCharatersPerLine { get; set; }
 
         [Category("Attribute Formatting")]
-        [DisplayName("Max attributes per line")]
+        [DisplayName("Max Attributes Per Line")]
         [JsonProperty("MaxAttributesPerLine", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines the maximum number of attributes an element can have on each line after the start tag if the number of attributes exceeds the attribute tolerance. A value of less than 1 means no limit.\r\n\r\nDefault Value: 1")]
         [DefaultValue(1)]
         public int MaxAttributesPerLine { get; set; }
 
         [Category("Attribute Formatting")]
-        [DisplayName("Elements with no line breaks between attributes")]
-        [JsonProperty("NoNewLineElements", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [DisplayName("Newline Exemption Elements")]
+        [JsonProperty("NewlineExemptionElements", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines a list of elements whose attributes should not be broken across lines.\r\n\r\nDefault Value: RadialGradientBrush, GradientStop, LinearGradientBrush, ScaleTransfom, SkewTransform, RotateTransform, TranslateTransform, Trigger, Setter")]
         [DefaultValue("RadialGradientBrush, GradientStop, LinearGradientBrush, ScaleTransfom, SkewTransform, RotateTransform, TranslateTransform, Trigger, Condition, Setter")]
-        public string NoNewLineElements { get; set; }
+        public string NewlineExemptionElements { get; set; }
 
         [Category("Attribute Formatting")]
-        [DisplayName("Put rule groups on separate lines")]
-        [JsonProperty("PutAttributeOrderRuleGroupsOnSeparateLines", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [Description("Defines whether attributes belonging to different rule groups should be put on separate lines, while, if possible, keeping identical groups on the same line.\r\n\r\nDefault Value: false")]
+        [DisplayName("Separate By Groups")]
+        [JsonProperty("SeparateByGroups", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [Description("Defines whether attributes belonging to different rule groups should be put on separate lines, while, if possible, keeping attributes in the same group on the same line.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
-        public bool PutAttributeOrderRuleGroupsOnSeparateLines { get; set; }
+        public bool SeparateByGroups { get; set; }
 
         // Attribute Reordering
 
@@ -135,7 +135,7 @@ namespace XamlMagic.Service.Options
         [Category("Attribute Reordering")]
         [DisplayName("Attribute Ordering Rule Groups")]
         [JsonProperty("AttributeOrderingRuleGroups")]
-        [Description("Defines attribute ordering rule groups. Each string element is one group. Use ',' as a delimiter between attributes. 'DOS' wildcards are allowed. XamlMagic will order attributes in groups from top to bottom, and within groups left to right.")]
+        [Description("Defines attribute ordering rule groups. Each string element is one group. Use ',' as a delimiter between attributes. 'DOS' wildcards are allowed. XAML Magic will order attributes in groups from top to bottom, and within groups left to right.")]
         public string[] AttributeOrderingRuleGroups { get; set; }
 
         private string serializedAttributeOrderingRuleGroups;
@@ -231,16 +231,16 @@ namespace XamlMagic.Service.Options
         [DefaultValue(ReorderSettersBy.None)]
         public ReorderSettersBy ReorderSetters { get; set; }
 
-        //Markup Extension
+        //Markup Extension Handling
 
-        [Category("Markup Extension")]
+        [Category("Markup Extension Handling")]
         [DisplayName("Enable markup extension formatting")]
         [JsonProperty("FormatMarkupExtension", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to format Markup Extensions (attributes containing '{}'). When true, attributes with markup extensions will always be put on a new line, unless the element is under the attribute tolerance or one of the specified elements is in the list of elements with no line breaks between attributes.\r\n\r\nDefault Value: true")]
         [DefaultValue(true)]
         public bool FormatMarkupExtension { get; set; }
 
-        [Category("Markup Extension")]
+        [Category("Markup Extension Handling")]
         [DisplayName("Keep markup extensions of these types on one line")]
         [JsonProperty("NoNewLineMarkupExtensions", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines a comma-separated list of Markup Extensions that are always kept on a single line\r\n\r\nDefault Value: x:Bind, Binding")]
@@ -265,14 +265,14 @@ namespace XamlMagic.Service.Options
 
         // Misc
 
-        [Category("Misc")]
+        [Category("Miscellaneous")]
         [DisplayName("Format XAML on save")]
         [JsonProperty("BeautifyOnSave", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to automatically format the active XAML document while saving.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
         public bool BeautifyOnSave { get; set; }
 
-        [Category("Misc")]
+        [Category("Miscellaneous")]
         [DisplayName("Number of spaces to pad comments with")]
         [JsonProperty("CommentSpaces", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Determines the number of spaces a XAML comment should be padded with.\r\n\r\nDefault Value: 2")]

@@ -19,7 +19,7 @@ namespace XamlMagic.Service.Options
 
         int MaxAttributesPerLine { get; set; }
 
-        string NoNewLineElements { get; set; }
+        string NewlineExemptionElements { get; set; }
 
         bool EnableAttributeReordering { get; set; }
 
@@ -27,7 +27,7 @@ namespace XamlMagic.Service.Options
 
         bool OrderAttributesByName { get; set; }
 
-        bool PutAttributeOrderRuleGroupsOnSeparateLines { get; set; }
+        bool SeparateByGroups { get; set; }
 
         bool PutEndingBracketOnNewLine { get; set; }
 

@@ -25,7 +25,7 @@ namespace XamlMagic.UnitTests
         {
             var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
-                PutAttributeOrderRuleGroupsOnSeparateLines = true,
+                SeparateByGroups = true,
                 MaxAttributesPerLine = 3,
             };
 

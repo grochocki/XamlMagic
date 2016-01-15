@@ -21,7 +21,7 @@ namespace XamlMagic.Service
 
         private IStylerOptions Options { get; set; }
 
-        private IList<string> NoNewLineElementsList { get; set; }
+        private IList<string> NewlineExemptionElementsList { get; set; }
 
         private IList<string> NoNewLineMarkupExtensionsList { get; set; }
 
@@ -97,7 +97,7 @@ namespace XamlMagic.Service
         public static StylerService CreateInstance(IStylerOptions options)
         {
             var stylerServiceInstance = new StylerService { Options = options };
-            stylerServiceInstance.NoNewLineElementsList = stylerServiceInstance.Options.NoNewLineElements.ToList();
+            stylerServiceInstance.NewlineExemptionElementsList = stylerServiceInstance.Options.NewlineExemptionElements.ToList();
             stylerServiceInstance.NoNewLineMarkupExtensionsList = stylerServiceInstance.Options.NoNewLineMarkupExtensions.ToList();
             stylerServiceInstance.OrderRules = new AttributeOrderRules(options);
             stylerServiceInstance.ElementProcessStatusStack.Clear();
@@ -275,7 +275,7 @@ namespace XamlMagic.Service
 
         private bool IsNoLineBreakElement(string elementName)
         {
-            return this.NoNewLineElementsList.Contains<string>(elementName);
+            return this.NewlineExemptionElementsList.Contains<string>(elementName);
         }
 
         private void ProcessXMLRoot(XmlReader xmlReader, StringBuilder output)
@@ -508,7 +508,7 @@ namespace XamlMagic.Service
                             bool isAttributeCountExceeded = (Options.MaxAttributesPerLine > 0)
                                 && ((attributeCountInCurrentLineBuffer + 1) > Options.MaxAttributesPerLine);
 
-                            bool isAttributeRuleGroupChanged = Options.PutAttributeOrderRuleGroupsOnSeparateLines
+                            bool isAttributeRuleGroupChanged = Options.SeparateByGroups
                                 && (lastAttributeInfo != null)
                                 && (lastAttributeInfo.OrderRule.Group != attrInfo.OrderRule.Group);
 

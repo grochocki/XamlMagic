@@ -44,7 +44,7 @@ namespace XamlMagic.UnitTests
             {
                 AttributesTolerance = 3,
                 MaxAttributesPerLine = 4,
-                PutAttributeOrderRuleGroupsOnSeparateLines = true,
+                SeparateByGroups = true,
                 RootElementLineBreakRule = lineBreakRule,
             };
 
