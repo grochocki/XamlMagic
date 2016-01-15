@@ -1,5 +1,4 @@
-Contribute
-==========
+###Contribute###
 * Download the Visual Studio 2015 SDK from https://msdn.microsoft.com/en-us/library/bb166441.aspx
 * Fork the XamlMagic project into your own GitHub account
 * Develop some awesome features
