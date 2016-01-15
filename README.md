@@ -1,4 +1,4 @@
-XAML Magic
+###XAML Magic###
 ==========
 XAML Magic is a visual studio extension, which formats XAML source code by sorting the attributes based on their importance. This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.
 
