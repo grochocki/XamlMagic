@@ -126,7 +126,7 @@ namespace XamlMagic.Service.Options
         // Attribute Reordering
 
         [Category("Attribute Reordering")]
-        [DisplayName("Enable attribute reordering")]
+        [DisplayName("Enable Attribute Reordering")]
         [JsonProperty("EnableAttributeReordering", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether attributes should be reordered. If false, attributes will not be reordered in any way.\r\n\r\nDefault Value: true")]
         [DefaultValue(true)]
@@ -165,7 +165,7 @@ namespace XamlMagic.Service.Options
         }
 
         [Category("Attribute Reordering")]
-        [DisplayName("Order attributes by name")]
+        [DisplayName("Order Attributes By Name")]
         [JsonProperty("OrderAttributesByName", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether attributes should be ordered by name if not determined by a rule.\r\n\r\nDefault Value: true")]
         [DefaultValue(true)]
@@ -174,23 +174,23 @@ namespace XamlMagic.Service.Options
         // Element formatting
 
         [Category("Element Formatting")]
-        [DisplayName("Put closing brackets on new line")]
+        [DisplayName("Put Ending Brackets On New Line")]
         [JsonProperty("PutEndingBracketOnNewLine", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [Description("Defines whether to put closing brackets on a new line.\r\n\r\nDefault Value: false")]
+        [Description("Defines whether to put ending brackets on a new line.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
         public bool PutEndingBracketOnNewLine { get; set; }
 
         [Category("Element Formatting")]
-        [DisplayName("Remove end tag of empty elements")]
+        [DisplayName("Remove Ending Tag of Empty Elements")]
         [JsonProperty("RemoveEndingTagOfEmptyElement", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to remove the end tag of an empty element.\r\n\r\nDefault Value: true")]
         [DefaultValue(true)]
         public bool RemoveEndingTagOfEmptyElement { get; set; }
 
         [Category("Element Formatting")]
-        [DisplayName("Space before closing brackets in self-closing elements")]
+        [DisplayName("Space Before Ending Slash in Self-Closing Elements")]
         [JsonProperty("SpaceBeforeClosingSlash", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
-        [Description("Defines whether there should be a space before the slash in closing brackets for self-closing elements.\r\n\r\nDefault Value: true")]
+        [Description("Defines whether there should be a space before the slash in ending brackets for self-closing elements.\r\n\r\nDefault Value: true")]
         [DefaultValue(true)]
         public bool SpaceBeforeClosingSlash { get; set; }
 
@@ -204,28 +204,28 @@ namespace XamlMagic.Service.Options
         // Element reordering
 
         [Category("Element Reordering")]
-        [DisplayName("Reorder visual state manager")]
+        [DisplayName("Reorder Visual State Manager")]
         [JsonProperty("ReorderVSM", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to reorder the visual state manager. When set to first or last, the visual state manager will be moved to the first or last child element in its parent, respectively, otherwise it will not be moved.\r\n\r\nDefault Value: Last")]
         [DefaultValue(VisualStateManagerRule.Last)]
         public VisualStateManagerRule ReorderVSM { get; set; }
 
         [Category("Element Reordering")]
-        [DisplayName("Reorder grid panel children by row/column")]
+        [DisplayName("Reorder Grid Panel Children")]
         [JsonProperty("ReorderGridChildren", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to reorder the children of a Grid by row/column. When true, children will be reordered in an ascending fashion by looking first at Grid.Row, then by Grid.Column.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
         public bool ReorderGridChildren { get; set; }
 
         [Category("Element Reordering")]
-        [DisplayName("Reorder canvas panel children by left/top/right/bottom")]
+        [DisplayName("Reorder Canvas Panel Children")]
         [JsonProperty("ReorderCanvasChildren", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to reorder the children of a Canvas by left/top/right/bottom. When true, children will be reordered in an ascending fashion by first at Canvas.Left, then by Canvas.Top, Canvas.Right, and finally, Canvas.Bottom.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
         public bool ReorderCanvasChildren { get; set; }
 
         [Category("Element Reordering")]
-        [DisplayName("Reorder setters by")]
+        [DisplayName("Reorder Setters")]
         [JsonProperty("ReorderSetters", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to reorder 'Setter' elements in style/trigger elements. When this is set, children will be reordered in an ascending fashion by looking at their Property and/or TargetName properties.\r\n\r\nDefault Value: None")]
         [DefaultValue(ReorderSettersBy.None)]
@@ -250,14 +250,14 @@ namespace XamlMagic.Service.Options
         // Thickness formatting
 
         [Category("Thickness formatting")]
-        [DisplayName("Thickness style")]
-        [JsonProperty("ThicknessStyle", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [DisplayName("Thickness Separator")]
+        [JsonProperty("ThicknessSeparator", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines how thickness attributes (i.e., margin, padding, etc.) should be formatted.\r\n\r\nDefault Value: Comma")]
-        [DefaultValue(ThicknessStyle.Comma)]
-        public ThicknessStyle ThicknessStyle { get; set; }
+        [DefaultValue(ThicknessSeparator.Comma)]
+        public ThicknessSeparator ThicknessSeparator { get; set; }
 
         [Category("Thickness formatting")]
-        [DisplayName("Thickness attributes")]
+        [DisplayName("Thickness Attributes")]
         [JsonProperty("ThicknessAttributes", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines a list of attributes that get reformatted if content appears to be a thickness.\r\n\r\nDefault Value: Margin, Padding, BorderThickness, ThumbnailClipMargin")]
         [DefaultValue("Margin, Padding, BorderThickness, ThumbnailClipMargin")]
@@ -266,18 +266,18 @@ namespace XamlMagic.Service.Options
         // Misc
 
         [Category("Miscellaneous")]
-        [DisplayName("Format XAML on save")]
-        [JsonProperty("BeautifyOnSave", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [DisplayName("Format XAML on Save")]
+        [JsonProperty("FormatOnSave", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether to automatically format the active XAML document while saving.\r\n\r\nDefault Value: false")]
         [DefaultValue(false)]
-        public bool BeautifyOnSave { get; set; }
+        public bool FormatOnSave { get; set; }
 
         [Category("Miscellaneous")]
-        [DisplayName("Number of spaces to pad comments with")]
-        [JsonProperty("CommentSpaces", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [DisplayName("Comment Padding")]
+        [JsonProperty("CommentPadding", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Determines the number of spaces a XAML comment should be padded with.\r\n\r\nDefault Value: 2")]
         [DefaultValue(2)]
-        public int CommentSpaces { get; set; }
+        public int CommentPadding { get; set; }
 
         // Configuration
 

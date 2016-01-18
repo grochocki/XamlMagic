@@ -18,8 +18,8 @@
     "ReorderSetters": 1,
     "FormatMarkupExtension": false,
     "NoNewLineMarkupExtensions": "Binding",
-    "ThicknessStyle": 1,
+    "ThicknessSeparator": 1,
     "ThicknessAttributes": "Margin",
-    "BeautifyOnSave": true,
-    "CommentSpaces": 3
+    "FormatOnSave": true,
+    "CommentPadding": 3
 }

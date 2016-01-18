@@ -31,8 +31,8 @@
     "ReorderSetters": 0,
     "FormatMarkupExtension": true,
     "NoNewLineMarkupExtensions": "x:Bind, Binding",
-    "ThicknessStyle": 2,
+    "ThicknessSeparator": 2,
     "ThicknessAttributes": "Margin, Padding, BorderThickness, ThumbnailClipMargin",
-    "BeautifyOnSave": false,
-    "CommentSpaces": 2
+    "FormatOnSave": false,
+    "CommentPadding": 2
 }

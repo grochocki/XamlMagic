@@ -65,7 +65,7 @@ namespace XamlMagic.UnitTests
         {
             var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
-                CommentSpaces = testNumber,
+                CommentPadding = testNumber,
             };
 
             this.DoTestCase(stylerOptions, testNumber);

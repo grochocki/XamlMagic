@@ -1,6 +1,6 @@
 namespace XamlMagic.Service.Reorder
 {
-    public enum ThicknessStyle
+    public enum ThicknessSeparator
     {
         None,
         Space,

@@ -34,7 +34,7 @@ namespace XamlMagic.Service
             ProcessElementServices = new List<IProcessElementService>
             {
                 new VSMReorderService() { Mode = this.Options.ReorderVSM },
-                new FormatThicknessService(this.Options.ThicknessStyle, this.Options.ThicknessAttributes),
+                new FormatThicknessService(this.Options.ThicknessSeparator, this.Options.ThicknessAttributes),
                 this.GetReorderGridChildrenService(),
                 this.GetReorderCanvasChildrenService(),
                 this.GetReorderSettersService()
@@ -332,9 +332,9 @@ namespace XamlMagic.Service
             {
                 output.Append(currentIndentString)
                     .Append("<!--")
-                    .Append(' ', Options.CommentSpaces)
+                    .Append(' ', Options.CommentPadding)
                     .Append(content.Trim())
-                    .Append(' ', Options.CommentSpaces)
+                    .Append(' ', Options.CommentPadding)
                     .Append("-->");
             }
         }

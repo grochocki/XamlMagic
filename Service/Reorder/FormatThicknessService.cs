@@ -12,14 +12,14 @@ namespace XamlMagic.Service.Reorder
 
         public bool IsEnabled { get; }
 
-        public ThicknessStyle ThicknessStyle { get; }
+        public ThicknessSeparator ThicknessSeparator { get; }
 
         public IList<NameSelector> ThicknessAttributeNames { get; }
 
-        public FormatThicknessService(ThicknessStyle thicknessStyle, string thicknessAttributes)
+        public FormatThicknessService(ThicknessSeparator ThicknessSeparator, string thicknessAttributes)
         {
-            this.IsEnabled = (thicknessStyle != ThicknessStyle.None);
-            this.ThicknessStyle = thicknessStyle;
+            this.IsEnabled = (ThicknessSeparator != ThicknessSeparator.None);
+            this.ThicknessSeparator = ThicknessSeparator;
             this.ThicknessAttributeNames = thicknessAttributes.ToNameSelectorList();
         }
 
@@ -64,7 +64,7 @@ namespace XamlMagic.Service.Reorder
 
         private void FormatAttribute(XAttribute attribute)
         {
-            char separator = (this.ThicknessStyle == ThicknessStyle.Comma) ? ',' : ' ';
+            char separator = (this.ThicknessSeparator == ThicknessSeparator.Comma) ? ',' : ' ';
 
             string formatted;
             if (ThicknessFormatter.TryFormat(attribute.Value, separator, out formatted))

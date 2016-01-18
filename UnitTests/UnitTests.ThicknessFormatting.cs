@@ -7,17 +7,17 @@ namespace XamlMagic.UnitTests
     [TestFixture]
     public sealed partial class UnitTests
     {
-        [TestCase(ThicknessStyle.None)]
-        [TestCase(ThicknessStyle.Comma)]
-        [TestCase(ThicknessStyle.Space)]
-        public void TestThicknessHandling(ThicknessStyle thicknessStyle)
+        [TestCase(ThicknessSeparator.None)]
+        [TestCase(ThicknessSeparator.Comma)]
+        [TestCase(ThicknessSeparator.Space)]
+        public void TestThicknessHandling(ThicknessSeparator ThicknessSeparator)
         {
             var stylerOptions = new StylerOptions(config: this.legacyConfig)
             {
-                ThicknessStyle = thicknessStyle
+                ThicknessSeparator = ThicknessSeparator
             };
 
-            this.DoTestCase(stylerOptions, thicknessStyle);
+            this.DoTestCase(stylerOptions, ThicknessSeparator);
         }
 
         [TestCase(" 123", ' ', "123")]

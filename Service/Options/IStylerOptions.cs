@@ -49,13 +49,13 @@ namespace XamlMagic.Service.Options
 
         string NoNewLineMarkupExtensions { get; set; }
 
-        ThicknessStyle ThicknessStyle { get; set; }
+        ThicknessSeparator ThicknessSeparator { get; set; }
 
         string ThicknessAttributes { get; set; }
 
-        bool BeautifyOnSave { get; set; }
+        bool FormatOnSave { get; set; }
 
-        int CommentSpaces { get; set; }
+        int CommentPadding { get; set; }
 
         string ConfigPath { get; set; }
     }

@@ -106,7 +106,7 @@ namespace XamlMagic.Plugin
             {
                 var options = GetDialogPage(typeof (PackageOptions)).AutomationObject as IStylerOptions;
 
-                if (options.BeautifyOnSave)
+                if (options.FormatOnSave)
                 {
                     this.Execute(document);
                 }
@@ -135,7 +135,7 @@ namespace XamlMagic.Plugin
             Parallel.ForEach(docs, document =>
             {
                 var options = GetDialogPage(typeof(PackageOptions)).AutomationObject as IStylerOptions;
-                if (options.BeautifyOnSave)
+                if (options.FormatOnSave)
                 {
                     this.Execute(document);
                 }
