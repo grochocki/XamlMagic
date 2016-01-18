@@ -1,4 +1,4 @@
-﻿1.0
+﻿1.2
 ----
 - Command line support for XAML Magic Visual Studio Extension
 - Process list of files with file type check and full settings support

@@ -1,6 +1,10 @@
 ﻿1.2
 ----
-- Default setting for list of markup extensions with no newlines to include regular Binding 
+- Added ability to specify external JSON configuration  
+- Added option to reset settings to default values  
+- Added command-line integration for scripting  
+- Fixed bug where attribute groups were not exporting from Visual Studio properly  
+- Updated default settings
 
 1.1
 ----
