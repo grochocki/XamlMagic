@@ -39,14 +39,14 @@ namespace XamlMagic.Service.Reorder
             if (element.Name == SetterName)
             {
                 var propertyAttribute = element.Attributes("Property").FirstOrDefault();
-                if ((propertyAttribute != null)
-                    && this.ThicknessAttributeNames.Any(_ => _.IsMatch(propertyAttribute.Value)))
-                {
-                    var valueAttribute = element.Attributes("Value").FirstOrDefault();
-                    if (valueAttribute != null)
-                    {
-                        this.FormatAttribute(valueAttribute);
-                    }
+				if ((propertyAttribute != null)
+				    && this.ThicknessAttributeNames.Any(_ => _.IsMatch(AttributeHelper.GetName(propertyAttribute))))
+				{
+					var valueAttribute = element.Attributes("Value").FirstOrDefault();
+					if (valueAttribute != null)
+					{
+						this.FormatAttribute(valueAttribute);
+					}
                 }
             }
             // Not setter. Format value of all attributes where attribute name matches ThicknessAttributeNames
