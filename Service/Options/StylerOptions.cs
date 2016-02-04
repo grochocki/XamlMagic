@@ -68,10 +68,10 @@ namespace XamlMagic.Service.Options
         //Indentation
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        [DefaultValue(2)]
+        [DefaultValue(4)]
+        [JsonProperty("IndentSize", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Browsable(false)]
-        [JsonIgnore]
-        public int IndentSize { get; set; } = 2;
+        public int IndentSize { get; set; } = 4;
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [DefaultValue(false)]

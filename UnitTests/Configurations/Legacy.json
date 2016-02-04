@@ -15,5 +15,6 @@
     ],
     "ReorderGridChildren": true,
     "ReorderCanvasChildren": true,
-    "ReorderVSM": 0
+    "ReorderVSM": 0,
+    "IndentSize": 2
 }
