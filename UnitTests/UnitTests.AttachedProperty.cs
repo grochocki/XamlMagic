@@ -9,10 +9,7 @@ namespace XamlMagic.UnitTests
         [Test]
         public void TestAttachedProperty()
         {
-            var stylerOptions = new StylerOptions(config: this.defaultConfig)
-			{
-				IndentWithTabs = true
-			};
+            var stylerOptions = new StylerOptions(config: this.legacyConfig);
 
             this.DoTest(stylerOptions);
         }
