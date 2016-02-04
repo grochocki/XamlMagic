@@ -32,7 +32,7 @@ namespace Xmagic
                         this.Log(JsonConvert.SerializeObject(stylerOptions), LogLevel.Insanity);
                     }
 
-                    this.Log(JsonConvert.SerializeObject(stylerOptions.AttributeOrderingRuleGroups));
+                    this.Log(JsonConvert.SerializeObject(stylerOptions.AttributeOrderingRuleGroups), LogLevel.Debug);
                 }
 
                 this.stylerService = StylerService.CreateInstance(stylerOptions);
