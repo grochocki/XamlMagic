@@ -14,7 +14,7 @@ namespace XamlMagic.Service.Options
         private readonly string[] DefaultAttributeOrderingRuleGroups = new string[]
         {
             // Class definition group
-            "x:Class",
+            "x:Class*",
             // WPF Namespaces group
             "xmlns, xmlns:x",
             // Other namespace

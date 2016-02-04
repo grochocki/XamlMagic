@@ -1,7 +1,7 @@
 {
     "AttributesTolerance": 3,
     "AttributeOrderingRuleGroups": [
-        "x:Class",
+        "x:Class*",
         "xmlns, xmlns:x",
         "xmlns:*",
         "x:Key, Key, x:Name, Name, x:Uid, Uid, Title",

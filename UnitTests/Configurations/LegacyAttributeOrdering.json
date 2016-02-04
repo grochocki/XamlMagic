@@ -1,6 +1,6 @@
 {
     "AttributeOrderingRuleGroups": [
-        "x:Class",
+        "x:Class*",
         "xmlns, xmlns:x",
         "xmlns:*",
         "Key, x:Key, Uid, x:Uid",

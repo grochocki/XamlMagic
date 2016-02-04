@@ -14,7 +14,7 @@ namespace XamlMagic.UnitTests
                 AttributeOrderingRuleGroups = new[]
                 {
                     // Class definition group
-                    "x:Class",
+                    "x:Class*",
                     // WPF Namespaces group
                     "xmlns, xmlns:x",
                     // Other namespace
