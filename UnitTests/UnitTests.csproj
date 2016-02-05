@@ -140,6 +140,12 @@
     <Content Include="TestConfigurations\SerializedSingle.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="TestFiles\TestCommentHandlingFirstLine.expected">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\TestCommentHandlingFirstLine.testxaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\TestCommentHandling_1.expected">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

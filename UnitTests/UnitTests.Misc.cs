@@ -72,6 +72,13 @@ namespace XamlMagic.UnitTests
         }
 
         [Test]
+        public void TestCommentHandlingFirstLine()
+        {
+            var stylerOptions = new StylerOptions(config: this.legacyConfig);
+            this.DoTest(stylerOptions);
+        }
+
+        [Test]
         public void TestCDATAHandling()
         {
             this.DoTest();

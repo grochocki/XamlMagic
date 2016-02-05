@@ -288,7 +288,7 @@ namespace XamlMagic.Service
             string currentIndentString = GetIndentString(xmlReader.Depth);
             string content = xmlReader.Value;
 
-            if (!output.IsNewLine())
+            if (output.Length > 0 && !output.IsNewLine())
             {
                 output.Append(Environment.NewLine);
             }
