@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\AttributeInfoExtension.cs" />
+    <Compile Include="Helpers\AttributeHelper.cs" />
     <Compile Include="Helpers\XmlReaderExtensions.cs" />
     <Compile Include="Helpers\MarkupExtensionInfoExtension.cs" />
     <Compile Include="Helpers\StringExtension.cs" />

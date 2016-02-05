@@ -40,7 +40,7 @@ namespace XamlMagic.Service.Reorder
             {
                 var propertyAttribute = element.Attributes("Property").FirstOrDefault();
                 if ((propertyAttribute != null)
-                    && this.ThicknessAttributeNames.Any(_ => _.IsMatch(propertyAttribute.Value)))
+                    && this.ThicknessAttributeNames.Any(_ => _.IsMatch(AttributeHelper.GetName(propertyAttribute))))
                 {
                     var valueAttribute = element.Attributes("Value").FirstOrDefault();
                     if (valueAttribute != null)
