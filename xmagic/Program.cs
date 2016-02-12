@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using XamlMagic.Service;
 using XamlMagic.Service.Options;
+using System.Text;
 
 namespace Xmagic
 {
@@ -61,24 +62,33 @@ namespace Xmagic
                     var path = Path.GetFullPath(file);
                     this.Log($"Full Path: {file}", LogLevel.Debug);
 
-                    var originalContent = File.ReadAllText(file);
-                    this.Log($"\nOriginal Content:\n\n{originalContent}\n", LogLevel.Insanity);
+                    string originalContent = null;
+                    Encoding encoding = Encoding.UTF8; // Visual Studio by default uses UTF8
+                    using (var reader = new StreamReader(path))
+                    {
+                        originalContent = reader.ReadToEnd();
+                        encoding = reader.CurrentEncoding;
+                        this.Log($"\nOriginal Content:\n\n{originalContent}\n", LogLevel.Insanity);
+                    }
 
                     var formattedOutput = stylerService.ManipulateTreeAndFormatInput(originalContent);
                     this.Log($"\nFormatted Output:\n\n{formattedOutput}\n", LogLevel.Insanity);
 
-                    try
-                    {
-                        File.WriteAllText(file, formattedOutput);
-                        this.Log($"Finished Processing: {file}", LogLevel.Verbose);
-                        successCount++;
-                    }
-                    catch(Exception e)
-                    {
-                        this.Log("Skipping... Error formatting XAML. Increase log level for more details.");
-                        this.Log($"Exception: {e.Message}", LogLevel.Verbose);
-                        this.Log($"StackTrace: {e.StackTrace}", LogLevel.Debug);
-                    }
+                    using (var writer = new StreamWriter(path, false, encoding))
+                    { 
+                        try
+                        {
+                            writer.Write(formattedOutput);
+                            this.Log($"Finished Processing: {file}", LogLevel.Verbose);
+                            successCount++;
+                        }
+                        catch (Exception e)
+                        {
+                            this.Log("Skipping... Error formatting XAML. Increase log level for more details.");
+                            this.Log($"Exception: {e.Message}", LogLevel.Verbose);
+                            this.Log($"StackTrace: {e.StackTrace}", LogLevel.Debug);
+                        }
+                    }                        
                 }
 
                 this.Log($"Processed {successCount} of {this.options.Files.Count} files.", LogLevel.Minimal);
