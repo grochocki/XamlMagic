@@ -13,31 +13,45 @@ namespace XamlMagic.UnitTests
             {
                 AttributeOrderingRuleGroups = new[]
                 {
-                    // Class definition group
                     "x:Class*",
-                    // WPF Namespaces group
                     "xmlns, xmlns:x",
-                    // Other namespace
                     "xmlns:*",
-                    // Element key group
                     "Key, x:Key, Uid, x:Uid",
-                    // Element name group
                     "Name, x:Name, Title",
-                    // Attached layout group
                     "Grid.Column, Grid.ColumnSpan, Grid.Row, Grid.RowSpan, Canvas.Right, Canvas.Bottom, Canvas.Left, Canvas.Top",
-                    // Core layout group
                     "MinWidth, MinHeight, Width, Height, MaxWidth, MaxHeight, Margin",
-                    // Alignment layout group
                     "Panel.ZIndex, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment",
-                    // Unmatched
                     "*:*, *",
-                    // Miscellaneous/Other attributes group
                     "Offset, Color, TargetName, Property, Value, StartPoint, EndPoint, PageSource, PageIndex",
-                    // Blend related group
                     "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText",
                 }
             };
 
+            this.DoTest(stylerOptions);
+        }
+
+        [Test]
+        public void TestWildCard()
+        {
+            var stylerOptions = new StylerOptions(config: this.defaultConfig)
+            {
+                AttributeOrderingRuleGroups = new[]
+                {
+                    "x:Class*",
+                    "xmlns, xmlns:x",
+                    "xmlns:*",
+                    "x:Key, Key, x:Name, Name, x:Uid, Uid, Title",
+                    "Grid.*, Canvas.Left, Canvas.Top, Canvas.Right, Canvas.Bottom",
+                    "Width, Height, MinWidth, MinHeight, MaxWidth, MaxHeight",
+                    "Margin, Padding, HorizontalAlignment, VerticalAlignment, HorizontalContentAlignment, VerticalContentAlignment, Panel.ZIndex",
+                    "Style, Background, Foreground, Fill, BorderBrush, BorderThickness, Stroke, StrokeThickness, Opacity",
+                    "FontFamily, FontSize, LineHeight, FontWeight, FontStyle, FontStretch",
+                    "*:*, *",
+                    "PageSource, PageIndex, Offset, Color, TargetName, Property, Value, StartPoint, EndPoint",
+                    "ToolTipService.*, AutomationProperties.*",
+                    "mc:Ignorable, d:IsDataSource, d:LayoutOverrides, d:IsStaticText"
+                }
+            };
             this.DoTest(stylerOptions);
         }
     }
