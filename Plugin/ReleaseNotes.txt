@@ -1,4 +1,12 @@
-﻿1.2
+﻿1.2.1
+----
+- Added IndentSize option to external configurations (used for xmagic.exe only)
+- Fixed broken wildcards in attribute ordering rule groups when using catch-all wildcards ("*" or "*:*")
+- Fixed bug in parsing property values when a namespace is specified
+- Fixed bug causing blank lines to be inserted before comments at the top of files
+- Improved default class definition attribute ordering rule group
+
+1.2
 ----
 - Added ability to specify external JSON configuration  
 - Added option to reset settings to default values  

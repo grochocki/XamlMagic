@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="74FDBBF7-6350-4D00-B942-DB64A3B95754" Version="1.2" Language="en-US" Publisher="Grochocki" />
+    <Identity Id="74FDBBF7-6350-4D00-B942-DB64A3B95754" Version="1.2.1" Language="en-US" Publisher="Grochocki" />
     <DisplayName>XAML Magic</DisplayName>
     <Description xml:space="preserve">XAML Magic is a visual studio extension, which formats XAML source code by sorting the attributes based on their importance. This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.</Description>
     <MoreInfo>https://github.com/grochocki/XamlMagic</MoreInfo>
