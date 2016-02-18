@@ -165,6 +165,13 @@ namespace XamlMagic.Service.Options
         }
 
         [Category("Attribute Reordering")]
+        [DisplayName("First Line Attributes")]
+        [JsonProperty("FirstLineAttributes", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+        [Description("Defines a list of attributes which should always appear on the same line as the element's start tag. Attribute reordering must be enabled for this setting to take effect.\r\n\r\nDefault Value: None")]
+        [DefaultValue("")]
+        public string FirstLineAttributes { get; set; }
+
+        [Category("Attribute Reordering")]
         [DisplayName("Order Attributes By Name")]
         [JsonProperty("OrderAttributesByName", DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
         [Description("Defines whether attributes should be ordered by name if not determined by a rule.\r\n\r\nDefault Value: true")]

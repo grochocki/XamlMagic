@@ -23,6 +23,8 @@ namespace XamlMagic.Service
 
         private IList<string> NewlineExemptionElementsList { get; set; }
 
+        private IList<string> FirstLineAttributes { get; set; }
+
         private IList<string> NoNewLineMarkupExtensionsList { get; set; }
 
         private AttributeOrderRules OrderRules { get; set; }
@@ -98,6 +100,7 @@ namespace XamlMagic.Service
         {
             var stylerServiceInstance = new StylerService { Options = options };
             stylerServiceInstance.NewlineExemptionElementsList = stylerServiceInstance.Options.NewlineExemptionElements.ToList();
+            stylerServiceInstance.FirstLineAttributes = stylerServiceInstance.Options.FirstLineAttributes.ToList();
             stylerServiceInstance.NoNewLineMarkupExtensionsList = stylerServiceInstance.Options.NoNewLineMarkupExtensions.ToList();
             stylerServiceInstance.OrderRules = new AttributeOrderRules(options);
             stylerServiceInstance.ElementProcessStatusStack.Clear();
@@ -278,6 +281,11 @@ namespace XamlMagic.Service
             return this.NewlineExemptionElementsList.Contains<string>(elementName);
         }
 
+        private bool IsFirstLineAttribute(string attributeName)
+        {
+            return this.FirstLineAttributes.Contains<string>(attributeName);
+        }
+
         private void ProcessXMLRoot(XmlReader xmlReader, StringBuilder output)
         {
             output.Append("<?xml ").Append(xmlReader.Value.Trim()).Append(" ?>");
@@ -393,6 +401,7 @@ namespace XamlMagic.Service
             bool isEmptyElement = xmlReader.IsEmptyElement;
             bool hasPutEndingBracketOnNewLine = false;
             var list = new List<AttributeInfo>(xmlReader.AttributeCount);
+            var firstLineList = new List<AttributeInfo>(xmlReader.AttributeCount);
 
             if (xmlReader.HasAttributes)
             {
@@ -401,7 +410,15 @@ namespace XamlMagic.Service
                     string attributeName = xmlReader.Name;
                     string attributeValue = xmlReader.Value;
                     AttributeOrderRule orderRule = OrderRules.GetRuleFor(attributeName);
-                    list.Add(new AttributeInfo(attributeName, attributeValue, orderRule));
+
+                    var attribute = new AttributeInfo(attributeName, attributeValue, orderRule);
+                    list.Add(attribute);
+
+                    // Maintain separate list of first line attributes.
+                    if (this.Options.EnableAttributeReordering && this.IsFirstLineAttribute(attribute.Name))
+                    {
+                        firstLineList.Add(attribute);
+                    }
 
                     // Check for xml:space as defined in http://www.w3.org/TR/2008/REC-xml-20081126/#sec-white-space
                     if (xmlReader.IsXmlSpaceAttribute())
@@ -413,6 +430,7 @@ namespace XamlMagic.Service
                 if (this.Options.EnableAttributeReordering)
                 {
                     list.Sort(AttributeInfoComparison);
+                    firstLineList.Sort(AttributeInfoComparison);
                 }
 
                 currentIndentString = this.GetIndentString(xmlReader.Depth);
@@ -459,8 +477,27 @@ namespace XamlMagic.Service
                     int attributeCountInCurrentLineBuffer = 0;
 
                     AttributeInfo lastAttributeInfo = null;
+
+                    // Process first line attributes.
+                    string firstLine = String.Empty;
+                    foreach (var attrInfo in firstLineList)
+                    {
+                        firstLine = $"{firstLine} {attrInfo.ToSingleLineString()}";
+                    }
+
+                    if (firstLine.Length > 0)
+                    {
+                        attributeLines.Add(firstLine);
+                    }
+
                     foreach (AttributeInfo attrInfo in list)
                     {
+                        // Skip attributes already added to first line.
+                        if (firstLineList.Contains(attrInfo))
+                        {
+                            continue;
+                        }
+
                         // Attributes with markup extension, always put on new line
                         if (attrInfo.IsMarkupExtension && this.Options.FormatMarkupExtension)
                         {
@@ -537,7 +574,7 @@ namespace XamlMagic.Service
 
                     for (int i = 0; i < attributeLines.Count; i++)
                     {
-                        if ((i == 0) && this.Options.KeepFirstAttributeOnSameLine)
+                        if ((i == 0) && (this.Options.KeepFirstAttributeOnSameLine || (firstLineList.Count > 0)))
                         {
                             output.Append(' ').Append(attributeLines[i].Trim());
 

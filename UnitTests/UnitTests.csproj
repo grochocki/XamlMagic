@@ -167,6 +167,12 @@
     <None Include="TestFiles\TestCommentHandling_3.expected">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="TestFiles\TestKeepSelectAttributesOnFirstLine.expected">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="TestFiles\TestKeepSelectAttributesOnFirstLine.testxaml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="TestFiles\TestWildcard.expected">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

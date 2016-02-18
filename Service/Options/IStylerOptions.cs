@@ -15,6 +15,8 @@ namespace XamlMagic.Service.Options
 
         bool KeepFirstAttributeOnSameLine { get; set; }
 
+        string FirstLineAttributes { get; set; }
+
         int MaxAttributeCharatersPerLine { get; set; }
 
         int MaxAttributesPerLine { get; set; }

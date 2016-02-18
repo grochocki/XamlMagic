@@ -21,6 +21,17 @@ namespace XamlMagic.UnitTests
         }
 
         [Test]
+        public void TestKeepSelectAttributesOnFirstLine()
+        {
+            var stylerOptions = new StylerOptions(config: this.defaultConfig)
+            {
+                FirstLineAttributes = "x:Name, x:Key"
+            };
+
+            this.DoTest(stylerOptions);
+        }
+
+        [Test]
         public void TestAttributeOrderRuleGroupsOnSeparateLinesHandling()
         {
             var stylerOptions = new StylerOptions(config: this.legacyConfig)

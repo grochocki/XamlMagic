@@ -8,6 +8,7 @@
     "SeparateByGroups": true,
     "EnableAttributeReordering": false,
     "AttributeOrderingRuleGroups": [ "x:Class" ],
+    "FirstLineAttributes": "x:Name",
     "OrderAttributesByName": false,
     "PutEndingBracketOnNewLine": true,
     "RemoveEndingTagOfEmptyElement": false,
