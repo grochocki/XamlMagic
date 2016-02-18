@@ -31,6 +31,29 @@ namespace XamlMagic.UnitTests
         }
 
         [Test]
+        public void TestFirstLineAttributes()
+        {
+            var stylerOptions = new StylerOptions(config: this.defaultConfig)
+            {
+                FirstLineAttributes = "x:Name, x:Key"
+            };
+
+            this.DoTest(stylerOptions);
+        }
+
+        [Test]
+        public void TestFirstLineAttributesDisabled()
+        {
+            var stylerOptions = new StylerOptions(config: this.defaultConfig)
+            {
+                FirstLineAttributes = "x:Name, x:Key",
+                EnableAttributeReordering = false
+            };
+
+            this.DoTest(stylerOptions);
+        }
+
+        [Test]
         public void TestWildCard()
         {
             var stylerOptions = new StylerOptions(config: this.defaultConfig)
