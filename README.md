@@ -2,7 +2,7 @@
 
 **This repository is no longer maintained. XAML Magic is being continued by the Xavalon team (including me) [here](https://github.com/Xavalon/XamlStyler).**
 
-**This plugin will remain available until features are back-ported and an update is available with functionailty, at which time another update will be posted here. Open issues are being transferred to the new repo.**
+**This plugin will remain available until features are back-ported and an update is available with functionailty, at which time another update will be posted here. All open issues have been transferred to the new repo.**
 
 ###XAML Magic###
 XAML Magic is a visual studio extension, which formats XAML source code by sorting the attributes based on their importance. This tool can help you/your team maintain a better XAML coding style as well as a much better XAML readability.
